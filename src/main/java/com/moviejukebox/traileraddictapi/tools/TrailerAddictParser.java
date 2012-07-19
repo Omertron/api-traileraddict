@@ -5,7 +5,6 @@ import com.moviejukebox.traileraddictapi.model.Trailer;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.ws.WebServiceException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;

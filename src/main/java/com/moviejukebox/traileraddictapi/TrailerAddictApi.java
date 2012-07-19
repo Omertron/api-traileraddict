@@ -17,7 +17,6 @@ import com.moviejukebox.traileraddictapi.tools.ApiBuilder;
 import com.moviejukebox.traileraddictapi.tools.TrailerAddictParser;
 import java.net.URL;
 import java.util.List;
-import org.apache.log4j.Logger;
 
 public final class TrailerAddictApi {
 
