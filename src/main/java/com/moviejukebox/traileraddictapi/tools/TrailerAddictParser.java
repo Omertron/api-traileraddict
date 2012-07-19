@@ -1,6 +1,7 @@
 package com.moviejukebox.traileraddictapi.tools;
 
 import com.moviejukebox.traileraddictapi.model.Trailer;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.ws.WebServiceException;
@@ -15,12 +16,13 @@ public final class TrailerAddictParser {
 
     private static final Logger LOGGER = Logger.getLogger(TrailerAddictParser.class);
 
-    public static List<Trailer> getFilmTrailers(String urlString) {
+    public static List<Trailer> getTrailers(URL url) {
         Document doc;
         List<Trailer> trailers = new ArrayList<Trailer>();
 
         try {
-            doc = DOMHelper.getEventDocFromUrl(urlString);
+            LOGGER.trace("Attempting to get trailer XML from " + url.toString());
+            doc = DOMHelper.getEventDocFromUrl(url.toString());
         } catch (WebServiceException ex) {
             return trailers;
         }
@@ -50,7 +52,9 @@ public final class TrailerAddictParser {
             }
         }
 
+        LOGGER.trace("Found " + trailers.size() + " trailers for " + url.toString());
         return trailers;
 
     }
+
 }
