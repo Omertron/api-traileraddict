@@ -1,5 +1,6 @@
 package com.moviejukebox.traileraddictapi.tools;
 
+import com.moviejukebox.traileraddictapi.TrailerAddictException;
 import com.moviejukebox.traileraddictapi.model.Trailer;
 import java.net.URL;
 import java.util.ArrayList;
@@ -16,6 +17,11 @@ public final class TrailerAddictParser {
 
     private static final Logger LOGGER = Logger.getLogger(TrailerAddictParser.class);
 
+    private TrailerAddictParser() {
+        // prevents calls from subclass
+        throw new UnsupportedOperationException("Class can not be initialised!");
+    }
+
     public static List<Trailer> getTrailers(URL url) {
         Document doc;
         List<Trailer> trailers = new ArrayList<Trailer>();
@@ -23,7 +29,9 @@ public final class TrailerAddictParser {
         try {
             LOGGER.trace("Attempting to get trailer XML from " + url.toString());
             doc = DOMHelper.getEventDocFromUrl(url.toString());
-        } catch (WebServiceException ex) {
+        } catch (TrailerAddictException ex) {
+            LOGGER.trace("Exception processing document; " + url.toString());
+            LOGGER.trace("Exception: " + ex.getResponse());
             return trailers;
         }
 
@@ -41,7 +49,7 @@ public final class TrailerAddictParser {
                 trailer.setLink(DOMHelper.getValueFromElement(eTrailer, "link"));
 
                 String trailerId = DOMHelper.getValueFromElement(eTrailer, "trailer_id");
-                if(StringUtils.isNumeric(trailerId)) {
+                if (StringUtils.isNumeric(trailerId)) {
                     trailer.setTrailerId(Integer.parseInt(trailerId));
                 }
 
@@ -56,5 +64,4 @@ public final class TrailerAddictParser {
         return trailers;
 
     }
-
 }

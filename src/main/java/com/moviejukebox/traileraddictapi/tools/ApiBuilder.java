@@ -54,6 +54,7 @@ public final class ApiBuilder {
     private static final int COUNT_MAX = 8;
 
     private ApiBuilder() {
+        // prevents calls from subclass
         throw new UnsupportedOperationException("Class can not be initialised!");
     }
 

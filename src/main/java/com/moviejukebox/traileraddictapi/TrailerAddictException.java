@@ -17,7 +17,7 @@ public class TrailerAddictException extends Exception {
     private static final long serialVersionUID = -8952129102483143278L;
 
     public enum TrailerAddictExceptionType {
-        UNKNOWN_CAUSE, INVALID_URL, HTTP_404_ERROR, ID_NOT_FOUND, MAPPING_FAILED, CONNECTION_ERROR, INVALID_IMAGE;
+        UNKNOWN_CAUSE, INVALID_URL, HTTP_404_ERROR, ID_NOT_FOUND, PARSE_ERROR, CONNECTION_ERROR, INVALID_IMAGE;
     }
 
     private final TrailerAddictExceptionType exceptionType;

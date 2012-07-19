@@ -13,6 +13,7 @@
 package com.moviejukebox.traileraddictapi.tools;
 
 import com.moviejukebox.traileraddictapi.TrailerAddictException;
+import com.moviejukebox.traileraddictapi.TrailerAddictException.TrailerAddictExceptionType;
 import java.io.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -40,7 +41,7 @@ public class DOMHelper {
     // Hide the constructor
     protected DOMHelper() {
         // prevents calls from subclass
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Class can not be initialised!");
     }
 
     /**
@@ -75,17 +76,15 @@ public class DOMHelper {
      * @return
      * @throws Exception
      */
-    public static synchronized Document getEventDocFromUrl(String url) throws WebServiceException {
+    public static synchronized Document getEventDocFromUrl(String url) throws TrailerAddictException {
         String webPage;
         InputStream in = null;
 
         try {
             webPage = WebBrowser.request(url);
             in = new ByteArrayInputStream(webPage.getBytes(ENCODING));
-        } catch (TrailerAddictException ex) {
-            throw new WebServiceException("Unable to download URL: " + url, ex);
         } catch (UnsupportedEncodingException ex) {
-            throw new WebServiceException("Unable to encode URL: " + url, ex);
+            throw new TrailerAddictException(TrailerAddictExceptionType.INVALID_URL, "Unable to encode URL: " + url, ex);
         }
 
         Document doc = null;
@@ -97,11 +96,11 @@ public class DOMHelper {
             doc = db.parse(in);
             doc.getDocumentElement().normalize();
         } catch (ParserConfigurationException error) {
-            throw new WebServiceException("Unable to parse TheTVDb response, please try again later.", error);
+            throw new TrailerAddictException(TrailerAddictExceptionType.PARSE_ERROR, "Unable to parse TheTVDb response, please try again later.", error);
         } catch (SAXException error) {
-            throw new WebServiceException("Unable to parse TheTVDb response, please try again later.", error);
+            throw new TrailerAddictException(TrailerAddictExceptionType.PARSE_ERROR, "Unable to parse TheTVDb response, please try again later.", error);
         } catch (IOException error) {
-            throw new WebServiceException("Unable to parse TheTVDb response, please try again later.", error);
+            throw new TrailerAddictException(TrailerAddictExceptionType.PARSE_ERROR, "Unable to parse TheTVDb response, please try again later.", error);
         } finally {
             if (in != null) {
                 try {
@@ -178,16 +177,4 @@ public class DOMHelper {
         parentElement.appendChild(child);
     }
 
-    /**
-     * Wait for a few milliseconds
-     *
-     * @param milliseconds
-     */
-    private static void waiting(int milliseconds) {
-        long t0, t1;
-        t0 = System.currentTimeMillis();
-        do {
-            t1 = System.currentTimeMillis();
-        } while ((t1 - t0) < milliseconds);
-    }
 }
