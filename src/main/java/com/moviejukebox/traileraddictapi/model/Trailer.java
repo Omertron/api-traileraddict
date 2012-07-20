@@ -108,11 +108,11 @@ public class Trailer {
     }
 
     public void addEmbed(String embedData) {
-        this.embed.put(TrailerSize.custom, link);
+        this.embed.put(TrailerSize.custom, embedData);
     }
 
-    public void addEmbed(TrailerSize size, String embed) {
-        this.embed.put(size, embed);
+    public void addEmbed(TrailerSize size, String embedData) {
+        this.embed.put(size, embedData);
     }
 
     public void setTrailerTitle(String trailerTitle) {
