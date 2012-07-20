@@ -12,10 +12,10 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -83,7 +83,7 @@ public class TrailerAddictApiTest {
      * Test of getFilm method, of class TrailerAddictApi.
      */
     @Test
-    public void testGetFilmWidth() throws Exception {
+    public void testGetFilmWidth() throws TrailerAddictException {
         LOGGER.info("getFilmWidth");
 
         String id = FILM_IDS.get(0);
@@ -100,7 +100,7 @@ public class TrailerAddictApiTest {
      * Test of getActor method, of class TrailerAddictApi.
      */
     @Test
-    public void testGetActor() throws Exception {
+    public void testGetActor() throws TrailerAddictException {
         LOGGER.info("getActor");
 
         for (String id : ACTOR_IDS) {
@@ -116,7 +116,7 @@ public class TrailerAddictApiTest {
      * Test of getActor method, of class TrailerAddictApi.
      */
     @Test
-    public void testGetActorWidth() throws Exception {
+    public void testGetActorWidth() throws TrailerAddictException {
         LOGGER.info("getActorWidth");
 
         String id = ACTOR_IDS.get(0);
@@ -133,7 +133,7 @@ public class TrailerAddictApiTest {
      * Test of getFilmImdb method, of class TrailerAddictApi.
      */
     @Test
-    public void testGetFilmImdb() throws Exception {
+    public void testGetFilmImdb() throws TrailerAddictException {
         LOGGER.info("getFilmImdb");
 
         for (String id : IMDB_IDS) {
@@ -148,7 +148,7 @@ public class TrailerAddictApiTest {
      * Test of getFilmImdb method, of class TrailerAddictApi.
      */
     @Test
-    public void testGetFilmImdbWidth() throws Exception {
+    public void testGetFilmImdbWidth() throws TrailerAddictException {
         LOGGER.info("getFilmImdbWidth");
 
         String id = IMDB_IDS.get(0);
@@ -165,7 +165,7 @@ public class TrailerAddictApiTest {
      * Test of getFeatured method, of class TrailerAddictApi.
      */
     @Test
-    public void testGetFeatured() throws Exception {
+    public void testGetFeatured() throws TrailerAddictException {
         LOGGER.info("getFeatured");
 
         for (String id : FEATURED_IDS) {
@@ -180,7 +180,7 @@ public class TrailerAddictApiTest {
      * Test of getFeatured method, of class TrailerAddictApi.
      */
     @Test
-    public void testGetFeaturedWidth() throws Exception {
+    public void testGetFeaturedWidth() throws TrailerAddictException {
         LOGGER.info("getFeatured");
 
         for (String id : FEATURED_IDS) {
@@ -198,7 +198,7 @@ public class TrailerAddictApiTest {
      * Test of getSimpleApi method, of class TrailerAddictApi.
      */
     @Test
-    public void testGetSimpleApi_String() {
+    public void testGetSimpleApi_String() throws TrailerAddictException {
         LOGGER.info("getSimpleApi (Via link string)");
         Trailer trailer = TrailerAddictApi.getSimpleApi(TEST_TRAILER_URL);
         assertNotNull("Simple trailer is null", trailer);
