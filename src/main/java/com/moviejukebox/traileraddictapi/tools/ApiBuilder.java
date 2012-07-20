@@ -98,8 +98,6 @@ public final class ApiBuilder {
             LOGGER.warn("Failed to create URL " + searchUrl.toString() + " - " + ex.toString());
             throw new TrailerAddictException(TrailerAddictExceptionType.INVALID_URL, searchUrl.toString(), ex);
         }
-
-
     }
 
     /**
@@ -271,8 +269,20 @@ public final class ApiBuilder {
         return getActorUrl(actorId, DEFAULT_INT, DEFAULT_INT);
     }
 
-    public static URL getSimpleUrl(String urlString) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    /**
+     * Convert the passed URL from the standard trailer URL to the simple API URL
+     *
+     * @param searchUrl
+     * @return
+     * @throws TrailerAddictException
+     */
+    public static URL getSimpleUrl(String searchUrl) throws TrailerAddictException {
+        try {
+            LOGGER.trace("URL: " + searchUrl.toString());
+            return new URL(searchUrl.replace("http://www.", "http://simpleapi."));
+        } catch (MalformedURLException ex) {
+            LOGGER.warn("Failed to create URL " + searchUrl + " - " + ex.toString());
+            throw new TrailerAddictException(TrailerAddictExceptionType.INVALID_URL, searchUrl, ex);
+        }
     }
-
 }
