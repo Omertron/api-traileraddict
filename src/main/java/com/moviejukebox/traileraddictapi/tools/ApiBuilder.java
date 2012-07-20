@@ -270,4 +270,9 @@ public final class ApiBuilder {
     public static URL getActorUrl(String actorId) throws TrailerAddictException {
         return getActorUrl(actorId, DEFAULT_INT, DEFAULT_INT);
     }
+
+    public static URL getSimpleUrl(String urlString) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
 }

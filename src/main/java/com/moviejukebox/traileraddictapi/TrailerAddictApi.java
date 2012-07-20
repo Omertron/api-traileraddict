@@ -211,4 +211,31 @@ public final class TrailerAddictApi {
     public static List<Trailer> getFeatured(String featured) throws TrailerAddictException {
         return getFeatured(featured, DEFAULT_COUNT, DEFAULT_WIDTH);
     }
+
+    /**
+     * Get more detailed information about a trailer.
+     *
+     * @param trailerUrl Pass the full URL of the trailer
+     * @return
+     */
+    public static Trailer getSimpleApi(String trailerUrl) {
+        URL url = ApiBuilder.getSimpleUrl(trailerUrl);
+        List<Trailer> trailers = TrailerAddictParser.getTrailers(url);
+        if (trailers == null || trailers.isEmpty()) {
+            // Nothing found
+            return new Trailer();
+        }
+        // return the first (and only) trailer
+        return trailers.get(0);
+    }
+
+    /**
+     * Get more detailed information about a trailer.
+     *
+     * @param trailer Pass the trailer object as returned by another method
+     * @return
+     */
+    public static Trailer getSimpleApi(Trailer trailer) {
+        return getSimpleApi(trailer.getLink());
+    }
 }
