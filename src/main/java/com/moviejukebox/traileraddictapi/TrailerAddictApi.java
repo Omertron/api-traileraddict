@@ -218,7 +218,7 @@ public final class TrailerAddictApi {
      * @param trailerUrl Pass the full URL of the trailer
      * @return
      */
-    public static Trailer getSimpleApi(String trailerUrl) {
+    public static Trailer getSimpleApi(String trailerUrl) throws TrailerAddictException {
         URL url = ApiBuilder.getSimpleUrl(trailerUrl);
         List<Trailer> trailers = TrailerAddictParser.getTrailers(url);
         if (trailers == null || trailers.isEmpty()) {
@@ -235,7 +235,7 @@ public final class TrailerAddictApi {
      * @param trailer Pass the trailer object as returned by another method
      * @return
      */
-    public static Trailer getSimpleApi(Trailer trailer) {
+    public static Trailer getSimpleApi(Trailer trailer) throws TrailerAddictException {
         return getSimpleApi(trailer.getLink());
     }
 }
