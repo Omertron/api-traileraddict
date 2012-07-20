@@ -2,6 +2,7 @@ package com.moviejukebox.traileraddictapi.tools;
 
 import com.moviejukebox.traileraddictapi.TrailerAddictException;
 import com.moviejukebox.traileraddictapi.model.Trailer;
+import com.moviejukebox.traileraddictapi.model.TrailerSize;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public final class TrailerAddictParser {
             if (nTrailer.getNodeType() == Node.ELEMENT_NODE) {
                 eTrailer = (Element) nTrailer;
                 trailer = new Trailer();
-                trailer.setTitle(DOMHelper.getValueFromElement(eTrailer, "title"));
+                trailer.setCombinedTitle(DOMHelper.getValueFromElement(eTrailer, "title"));
                 trailer.setLink(DOMHelper.getValueFromElement(eTrailer, "link"));
 
                 String trailerId = DOMHelper.getValueFromElement(eTrailer, "trailer_id");
@@ -53,8 +54,23 @@ public final class TrailerAddictParser {
                 }
 
                 trailer.setPublishDate(DOMHelper.getValueFromElement(eTrailer, "pubDate"));
-                trailer.setEmbed(DOMHelper.getValueFromElement(eTrailer, "embed"));
+                trailer.addEmbed(DOMHelper.getValueFromElement(eTrailer, "embed"));
 
+                // Simple API stuff here
+                trailer.setTrailerTitle(DOMHelper.getValueFromElement(eTrailer, "video_title"));
+                trailer.setDescription(DOMHelper.getValueFromElement(eTrailer, "description"));
+                trailer.setFilmTitle(DOMHelper.getValueFromElement(eTrailer, "film"));
+                trailer.addEmbed(TrailerSize.standard, DOMHelper.getValueFromElement(eTrailer, "embed_standard"));
+                trailer.addEmbed(TrailerSize.small, DOMHelper.getValueFromElement(eTrailer, "embed_small"));
+                trailer.addEmbed(TrailerSize.medium, DOMHelper.getValueFromElement(eTrailer, "embed_medium"));
+                trailer.addEmbed(TrailerSize.large, DOMHelper.getValueFromElement(eTrailer, "embed_large"));
+                trailer.setDirectors(DOMHelper.getValueFromElement(eTrailer, "director"));
+                trailer.setWriters(DOMHelper.getValueFromElement(eTrailer, "writer"));
+                trailer.setCast(DOMHelper.getValueFromElement(eTrailer, "cast"));
+                trailer.setStudio(DOMHelper.getValueFromElement(eTrailer, "studio"));
+                trailer.setReleaseDate(DOMHelper.getValueFromElement(eTrailer, "release_date"));
+
+                // Add the trailer to the list
                 trailers.add(trailer);
             }
         }
