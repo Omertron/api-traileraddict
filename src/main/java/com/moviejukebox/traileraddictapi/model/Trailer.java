@@ -7,10 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Trailer {
+
+    private static final String TRAILER_URL = "http://www.traileraddict.com/fvar.php?tid=";
     /*
      * Properties
      */
-
     private String combinedTitle = "";
     private String link = "";
     private String publishDate = "";
@@ -205,9 +206,20 @@ public class Trailer {
     }
     //</editor-fold>
 
+    /**
+     * Get the URL to download the trailer from.
+     *
+     * This returns the page in which the trailer URL can be found
+     *
+     * @return
+     */
+    public String getTrailerDownloadUrl() {
+        return (TRAILER_URL + String.valueOf(trailerId));
+    }
+
     private String stripCdata(String source) {
         if (source.contains("CDATA")) {
-            return source.replace("<![CDATA[", "").replace("]]","").trim();
+            return source.replace("<![CDATA[", "").replace("]]", "").trim();
         } else {
             return source;
         }
