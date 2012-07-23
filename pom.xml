@@ -13,7 +13,7 @@
 
     <groupId>com.moviejukebox</groupId>
     <artifactId>API-TrailerAddict</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
     <name>API-TrailerAddict</name>
     <description>API for the TrailerAddict.com website</description>
@@ -32,7 +32,7 @@
         <url>scm:git:git@github.com:Omertron/api-traileraddict.git</url>
         <connection>scm:git:git@github.com:Omertron/api-traileraddict.git</connection>
         <developerConnection>scm:git:git@github.com:Omertron/api-traileraddict.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>API-TrailerAddict-1.2</tag>
   </scm>
 
     <properties>
