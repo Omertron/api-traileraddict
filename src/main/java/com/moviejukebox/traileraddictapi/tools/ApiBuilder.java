@@ -278,7 +278,7 @@ public final class ApiBuilder {
      */
     public static URL getSimpleUrl(String searchUrl) throws TrailerAddictException {
         try {
-            LOGGER.trace("URL: " + searchUrl.toString());
+            LOGGER.trace("URL: " + searchUrl);
             return new URL(searchUrl.replace("http://www.", "http://simpleapi."));
         } catch (MalformedURLException ex) {
             LOGGER.warn("Failed to create URL " + searchUrl + " - " + ex.toString());

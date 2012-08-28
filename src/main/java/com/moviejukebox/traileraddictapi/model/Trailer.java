@@ -1,14 +1,22 @@
 package com.moviejukebox.traileraddictapi.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class Trailer {
+public class Trailer implements Serializable {
 
+    /*
+     * Logger
+     */
     private static final String TRAILER_URL = "http://www.traileraddict.com/fvar.php?tid=";
+    /*
+     * Serial Version
+     */
+    private static final long serialVersionUID = 1L;
     /*
      * Properties
      */
@@ -214,7 +222,7 @@ public class Trailer {
      * @return
      */
     public String getTrailerDownloadUrl() {
-        return (TRAILER_URL + String.valueOf(trailerId));
+        return (TRAILER_URL + trailerId);
     }
 
     private String stripCdata(String source) {
