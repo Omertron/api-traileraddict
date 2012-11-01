@@ -1,6 +1,8 @@
 API-TrailerAddict
 =================
 
+Author: Stuart Boston (Omertron AT Gmail DOT com)
+
 API for the Trailer Addict website
 http://www.traileraddict.com/trailerapi
 
