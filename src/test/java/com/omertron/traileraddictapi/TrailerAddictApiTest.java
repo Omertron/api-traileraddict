@@ -7,10 +7,10 @@
  *      For any reuse or distribution, you must make clear to others the
  *      license terms of this work.
  */
-package com.moviejukebox.traileraddictapi;
+package com.omertron.traileraddictapi;
 
-import com.moviejukebox.traileraddictapi.model.Trailer;
-import com.moviejukebox.traileraddictapi.model.TrailerSize;
+import com.omertron.traileraddictapi.model.Trailer;
+import com.omertron.traileraddictapi.model.TrailerSize;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Level;

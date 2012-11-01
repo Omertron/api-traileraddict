@@ -7,10 +7,10 @@
  *      For any reuse or distribution, you must make clear to others the
  *      license terms of this work.
  */
-package com.moviejukebox.traileraddictapi.tools;
+package com.omertron.traileraddictapi.tools;
 
-import com.moviejukebox.traileraddictapi.TrailerAddictException;
-import com.moviejukebox.traileraddictapi.TrailerAddictException.TrailerAddictExceptionType;
+import com.omertron.traileraddictapi.TrailerAddictException;
+import com.omertron.traileraddictapi.TrailerAddictException.TrailerAddictExceptionType;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

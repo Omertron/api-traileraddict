@@ -7,11 +7,11 @@
  *      For any reuse or distribution, you must make clear to others the
  *      license terms of this work.
  */
-package com.moviejukebox.traileraddictapi;
+package com.omertron.traileraddictapi;
 
-import com.moviejukebox.traileraddictapi.model.Trailer;
-import com.moviejukebox.traileraddictapi.tools.ApiBuilder;
-import com.moviejukebox.traileraddictapi.tools.TrailerAddictParser;
+import com.omertron.traileraddictapi.model.Trailer;
+import com.omertron.traileraddictapi.tools.ApiBuilder;
+import com.omertron.traileraddictapi.tools.TrailerAddictParser;
 import java.net.URL;
 import java.util.List;
 
