@@ -13,7 +13,7 @@
 
     <groupId>com.omertron</groupId>
     <artifactId>traileraddictapi</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.4</version>
     <name>API-TrailerAddict</name>
     <packaging>jar</packaging>
     <description>API for the TrailerAddict.com website</description>
@@ -39,7 +39,8 @@
         <url>scm:git:git@github.com:Omertron/api-traileraddict.git</url>
         <connection>scm:git:git@github.com:Omertron/api-traileraddict.git</connection>
         <developerConnection>scm:git:git@github.com:Omertron/api-traileraddict.git</developerConnection>
-    </scm>
+      <tag>traileraddictapi-1.4</tag>
+  </scm>
 
     <profiles>
         <profile>
