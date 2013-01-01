@@ -1,5 +1,5 @@
 /*
- *      Copyright (c) 2004-2012 Stuart Boston
+ *      Copyright (c) 2004-2013 Stuart Boston
  *
  *      This software is licensed under a Creative Commons License
  *      See the LICENCE.txt file included in this package
