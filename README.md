@@ -28,3 +28,7 @@ The same as Film, except the key is the IMDB ID instead of the TrailerAddict key
 
 __Simple-API__:
 Provides more detailed information about a trailer, such as director, writer, cast, etc.
+
+Project Documentation
+---------------------
+The automatically generated documentation can be found [HERE](http://omertron.github.com/api-traileraddict/)
