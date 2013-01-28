@@ -55,7 +55,7 @@ public class DOMHelper {
      *
      * @param element
      * @param tagName
-     * @return
+
      */
     public static String getValueFromElement(Element element, String tagName) {
         NodeList elementNodeList = element.getElementsByTagName(tagName);
@@ -79,7 +79,7 @@ public class DOMHelper {
      * Get a DOM document from the supplied URL
      *
      * @param url
-     * @return
+
      * @throws Exception
      */
     public static synchronized Document getEventDocFromUrl(String url) throws TrailerAddictException {
@@ -124,7 +124,7 @@ public class DOMHelper {
      * Convert a DOM document to a string
      *
      * @param doc
-     * @return
+
      * @throws TransformerException
      */
     public static String convertDocToString(Document doc) throws TransformerException {
@@ -147,7 +147,7 @@ public class DOMHelper {
      *
      * @param doc The document to save
      * @param localFile The file to write to
-     * @return
+
      */
     public static boolean writeDocumentToFile(Document doc, String localFile) {
         try {

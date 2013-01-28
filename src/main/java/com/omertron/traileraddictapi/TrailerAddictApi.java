@@ -44,7 +44,7 @@ public final class TrailerAddictApi {
      * @param filmId
      * @param count The number of trailers to return
      * @param width The width to be used in the embedded URL
-     * @return
+
      * @throws TrailerAddictException
      */
     public static List<Trailer> getFilm(String filmId, int count, int width) throws TrailerAddictException {
@@ -60,7 +60,7 @@ public final class TrailerAddictApi {
      *
      * @param filmId
      * @param count The number of trailers to return
-     * @return
+
      * @throws TrailerAddictException
      */
     public static List<Trailer> getFilm(String filmId, int count) throws TrailerAddictException {
@@ -74,7 +74,7 @@ public final class TrailerAddictApi {
      * max-payne
      *
      * @param filmId
-     * @return
+
      * @throws TrailerAddictException
      */
     public static List<Trailer> getFilm(String filmId) throws TrailerAddictException {
@@ -90,7 +90,7 @@ public final class TrailerAddictApi {
      * @param actorId
      * @param count The number of trailers to return
      * @param width The width to be used in the embedded URL
-     * @return
+
      * @throws TrailerAddictException
      */
     public static List<Trailer> getActor(String actorId, int count, int width) throws TrailerAddictException {
@@ -106,7 +106,7 @@ public final class TrailerAddictApi {
      *
      * @param actorId
      * @param count The number of trailers to return
-     * @return
+
      * @throws TrailerAddictException
      */
     public static List<Trailer> getActor(String actorId, int count) throws TrailerAddictException {
@@ -120,7 +120,7 @@ public final class TrailerAddictApi {
      * brad-pitt
      *
      * @param actorId
-     * @return
+
      * @throws TrailerAddictException
      */
     public static List<Trailer> getActor(String actorId) throws TrailerAddictException {
@@ -135,7 +135,7 @@ public final class TrailerAddictApi {
      * @param imdbId
      * @param count The number of trailers to return
      * @param width The width to be used in the embedded URL
-     * @return
+
      * @throws TrailerAddictException
      */
     public static List<Trailer> getFilmImdb(String imdbId, int count, int width) throws TrailerAddictException {
@@ -150,7 +150,7 @@ public final class TrailerAddictApi {
      *
      * @param imdbId
      * @param count The number of trailers to return
-     * @return
+
      * @throws TrailerAddictException
      */
     public static List<Trailer> getFilmImdb(String imdbId, int count) throws TrailerAddictException {
@@ -163,7 +163,7 @@ public final class TrailerAddictApi {
      * This method uses the IMDB ID to get a list of trailers.
      *
      * @param imdbId
-     * @return
+
      * @throws TrailerAddictException
      */
     public static List<Trailer> getFilmImdb(String imdbId) throws TrailerAddictException {
@@ -180,7 +180,7 @@ public final class TrailerAddictApi {
      * @param featured Either 'yes' or 'no'
      * @param count The number of trailers to return
      * @param width The width to be used in the embedded URL
-     * @return
+
      * @throws TrailerAddictException
      */
     public static List<Trailer> getFeatured(String featured, int count, int width) throws TrailerAddictException {
@@ -197,7 +197,7 @@ public final class TrailerAddictApi {
      *
      * @param featured Either 'yes' or 'no'
      * @param count The number of trailers to return
-     * @return
+
      * @throws TrailerAddictException
      */
     public static List<Trailer> getFeatured(String featured, int count) throws TrailerAddictException {
@@ -212,7 +212,7 @@ public final class TrailerAddictApi {
      * Setting featured="no" then the most recent trailer additions will be listed
      *
      * @param featured Either 'yes' or 'no'
-     * @return
+
      * @throws TrailerAddictException
      */
     public static List<Trailer> getFeatured(String featured) throws TrailerAddictException {
@@ -223,7 +223,7 @@ public final class TrailerAddictApi {
      * Get more detailed information about a trailer.
      *
      * @param trailerUrl Pass the full URL of the trailer
-     * @return
+
      */
     public static Trailer getSimpleApi(String trailerUrl) throws TrailerAddictException {
         URL url = ApiBuilder.getSimpleUrl(trailerUrl);
@@ -240,7 +240,7 @@ public final class TrailerAddictApi {
      * Get more detailed information about a trailer.
      *
      * @param trailer Pass the trailer object as returned by another method
-     * @return
+
      */
     public static Trailer getSimpleApi(Trailer trailer) throws TrailerAddictException {
         return getSimpleApi(trailer.getLink());

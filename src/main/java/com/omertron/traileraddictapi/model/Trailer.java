@@ -237,13 +237,16 @@ public class Trailer implements Serializable {
      * Get the URL to download the trailer from.
      *
      * This returns the page in which the trailer URL can be found
-     *
-     * @return
      */
     public String getTrailerDownloadUrl() {
         return (TRAILER_URL + trailerId);
     }
 
+    /**
+     * Remove the CDATA formatting from the source string
+     *
+     * @param source
+     */
     private String stripCdata(String source) {
         if (source.contains("CDATA")) {
             return source.replace("<![CDATA[", "").replace("]]", "").trim();
