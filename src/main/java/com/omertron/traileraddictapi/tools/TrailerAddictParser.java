@@ -26,7 +26,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -34,7 +35,7 @@ import org.w3c.dom.NodeList;
 
 public final class TrailerAddictParser {
 
-    private static final Logger LOGGER = Logger.getLogger(TrailerAddictParser.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TrailerAddictParser.class);
 
     private TrailerAddictParser() {
         // prevents calls from subclass
@@ -46,11 +47,11 @@ public final class TrailerAddictParser {
         List<Trailer> trailers = new ArrayList<Trailer>();
 
         try {
-            LOGGER.trace("Attempting to get trailer XML from " + url.toString());
+            LOG.trace("Attempting to get trailer XML from " + url.toString());
             doc = DOMHelper.getEventDocFromUrl(url.toString());
         } catch (TrailerAddictException ex) {
-            LOGGER.trace("Exception processing document; " + url.toString());
-            LOGGER.trace("Exception: " + ex.getResponse());
+            LOG.trace("Exception processing document; " + url.toString());
+            LOG.trace("Exception: " + ex.getResponse());
             return trailers;
         }
 
@@ -94,7 +95,7 @@ public final class TrailerAddictParser {
             }
         }
 
-        LOGGER.trace("Found " + trailers.size() + " trailers for " + url.toString());
+        LOG.trace("Found " + trailers.size() + " trailers for " + url.toString());
         return trailers;
 
     }

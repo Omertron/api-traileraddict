@@ -27,7 +27,7 @@ import java.util.List;
 
 public final class TrailerAddictApi {
 
-//    private static final Logger LOGGER = Logger.getLogger(TrailerAddictApi.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(TrailerAddictApi.class);
     private static final int DEFAULT_WIDTH = -1;
     private static final int DEFAULT_COUNT = 1;
 

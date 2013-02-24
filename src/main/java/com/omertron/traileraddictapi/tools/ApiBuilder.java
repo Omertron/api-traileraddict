@@ -23,7 +23,8 @@ import com.omertron.traileraddictapi.TrailerAddictException;
 import com.omertron.traileraddictapi.TrailerAddictException.TrailerAddictExceptionType;
 import java.net.MalformedURLException;
 import java.net.URL;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Build the API URL that is used to fetch the data
@@ -35,7 +36,7 @@ public final class ApiBuilder {
      * Logger
      */
 
-    private static final Logger LOGGER = Logger.getLogger(ApiBuilder.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ApiBuilder.class);
     /*
      * TrailerAddict API Base URL
      */
@@ -98,10 +99,10 @@ public final class ApiBuilder {
         }
 
         try {
-            LOGGER.trace("URL: " + searchUrl.toString());
+            LOG.trace("URL: " + searchUrl.toString());
             return new URL(searchUrl.toString());
         } catch (MalformedURLException ex) {
-            LOGGER.warn("Failed to create URL " + searchUrl.toString() + " - " + ex.toString());
+            LOG.warn("Failed to create URL " + searchUrl.toString() + " - " + ex.toString());
             throw new TrailerAddictException(TrailerAddictExceptionType.INVALID_URL, searchUrl.toString(), ex);
         }
     }
@@ -281,10 +282,10 @@ public final class ApiBuilder {
      */
     public static URL getSimpleUrl(String searchUrl) throws TrailerAddictException {
         try {
-            LOGGER.trace("URL: " + searchUrl);
+            LOG.trace("URL: " + searchUrl);
             return new URL(searchUrl.replace("http://www.", "http://simpleapi."));
         } catch (MalformedURLException ex) {
-            LOGGER.warn("Failed to create URL " + searchUrl + " - " + ex.toString());
+            LOG.warn("Failed to create URL " + searchUrl + " - " + ex.toString());
             throw new TrailerAddictException(TrailerAddictExceptionType.INVALID_URL, searchUrl, ex);
         }
     }

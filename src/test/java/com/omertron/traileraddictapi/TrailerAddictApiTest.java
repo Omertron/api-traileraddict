@@ -23,8 +23,8 @@ import com.omertron.traileraddictapi.model.Trailer;
 import com.omertron.traileraddictapi.model.TrailerSize;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
@@ -38,7 +38,7 @@ import org.junit.Test;
  */
 public class TrailerAddictApiTest {
 
-    private static final Logger LOGGER = Logger.getLogger(TrailerAddictApiTest.class);
+    private static final Logger LOG = Logger.getLogger(TrailerAddictApiTest.class.getSimpleName());
     private static final List<String> FILM_IDS = new ArrayList<String>();
     private static final List<String> IMDB_IDS = new ArrayList<String>();
     private static final List<String> ACTOR_IDS = new ArrayList<String>();
@@ -53,8 +53,8 @@ public class TrailerAddictApiTest {
 
     @BeforeClass
     public static void setUpClass() {
-        // Set the logger level to TRACE
-        Logger.getRootLogger().setLevel(Level.TRACE);
+        // Set the logger level to ALL
+        LOG.setLevel(Level.ALL);
         // Add the film IDs
         FILM_IDS.add("the-hobbit");
 
@@ -84,7 +84,7 @@ public class TrailerAddictApiTest {
      */
     @Test
     public void testGetFilm() throws TrailerAddictException {
-        LOGGER.info("getFilm");
+        LOG.info("getFilm");
 
         for (String id : FILM_IDS) {
             List<Trailer> trailers = TrailerAddictApi.getFilm(id, NUMBER_OF_TRAILERS);
@@ -99,7 +99,7 @@ public class TrailerAddictApiTest {
      */
     @Test
     public void testGetFilmWidth() throws TrailerAddictException {
-        LOGGER.info("getFilmWidth");
+        LOG.info("getFilmWidth");
 
         String id = FILM_IDS.get(0);
         List<Trailer> trailers = TrailerAddictApi.getFilm(id, NUMBER_OF_TRAILERS, REQUIRED_WIDTH);
@@ -116,10 +116,10 @@ public class TrailerAddictApiTest {
      */
     @Test
     public void testGetActor() throws TrailerAddictException {
-        LOGGER.info("getActor");
+        LOG.info("getActor");
 
         for (String id : ACTOR_IDS) {
-            LOGGER.info("Actor: " + id);
+            LOG.log(Level.INFO, "Actor: {0}", id);
             List<Trailer> trailers = TrailerAddictApi.getActor(id, NUMBER_OF_TRAILERS);
             assertNotNull("List of trailers is null for " + id, trailers);
             assertFalse("List of trailers is empty for " + id, trailers.isEmpty());
@@ -132,7 +132,7 @@ public class TrailerAddictApiTest {
      */
     @Test
     public void testGetActorWidth() throws TrailerAddictException {
-        LOGGER.info("getActorWidth");
+        LOG.info("getActorWidth");
 
         String id = ACTOR_IDS.get(0);
         List<Trailer> trailers = TrailerAddictApi.getActor(id, NUMBER_OF_TRAILERS, REQUIRED_WIDTH);
@@ -149,7 +149,7 @@ public class TrailerAddictApiTest {
      */
     @Test
     public void testGetFilmImdb() throws TrailerAddictException {
-        LOGGER.info("getFilmImdb");
+        LOG.info("getFilmImdb");
 
         for (String id : IMDB_IDS) {
             List<Trailer> trailers = TrailerAddictApi.getFilmImdb(id, NUMBER_OF_TRAILERS);
@@ -164,7 +164,7 @@ public class TrailerAddictApiTest {
      */
     @Test
     public void testGetFilmImdbWidth() throws TrailerAddictException {
-        LOGGER.info("getFilmImdbWidth");
+        LOG.info("getFilmImdbWidth");
 
         String id = IMDB_IDS.get(0);
         List<Trailer> trailers = TrailerAddictApi.getFilmImdb(id, NUMBER_OF_TRAILERS, REQUIRED_WIDTH);
@@ -181,7 +181,7 @@ public class TrailerAddictApiTest {
      */
     @Test
     public void testGetFeatured() throws TrailerAddictException {
-        LOGGER.info("getFeatured");
+        LOG.info("getFeatured");
 
         for (String id : FEATURED_IDS) {
             List<Trailer> trailers = TrailerAddictApi.getFeatured(id, NUMBER_OF_TRAILERS);
@@ -196,7 +196,7 @@ public class TrailerAddictApiTest {
      */
     @Test
     public void testGetFeaturedWidth() throws TrailerAddictException {
-        LOGGER.info("getFeatured");
+        LOG.info("getFeatured");
 
         for (String id : FEATURED_IDS) {
             List<Trailer> trailers = TrailerAddictApi.getFeatured(id, NUMBER_OF_TRAILERS, REQUIRED_WIDTH);
@@ -214,7 +214,7 @@ public class TrailerAddictApiTest {
      */
     @Test
     public void testGetSimpleApi_String() throws TrailerAddictException {
-        LOGGER.info("getSimpleApi (Via link string)");
+        LOG.info("getSimpleApi (Via link string)");
         Trailer trailer = TrailerAddictApi.getSimpleApi(TEST_TRAILER_URL);
         assertNotNull("Simple trailer is null", trailer);
         assertFalse("Simple trailer is empty", trailer.getEmbed().isEmpty());
@@ -225,7 +225,7 @@ public class TrailerAddictApiTest {
      */
     @Test
     public void testGetSimpleApi_Trailer() throws TrailerAddictException {
-        LOGGER.info("getSimpleApi (via Trailer)");
+        LOG.info("getSimpleApi (via Trailer)");
 
         for (String id : FILM_IDS) {
             List<Trailer> trailers = TrailerAddictApi.getFilm(id, NUMBER_OF_TRAILERS);
