@@ -23,14 +23,14 @@ import com.omertron.traileraddictapi.model.Trailer;
 import com.omertron.traileraddictapi.model.TrailerSize;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -38,7 +38,7 @@ import org.junit.Test;
  */
 public class TrailerAddictApiTest {
 
-    private static final Logger LOG = Logger.getLogger(TrailerAddictApiTest.class.getSimpleName());
+    private static final Logger LOG = LoggerFactory.getLogger(TrailerAddictApiTest.class);
     private static final List<String> FILM_IDS = new ArrayList<String>();
     private static final List<String> IMDB_IDS = new ArrayList<String>();
     private static final List<String> ACTOR_IDS = new ArrayList<String>();
@@ -53,8 +53,8 @@ public class TrailerAddictApiTest {
 
     @BeforeClass
     public static void setUpClass() {
-        // Set the logger level to ALL
-        LOG.setLevel(Level.ALL);
+        TestLogger.Configure();
+
         // Add the film IDs
         FILM_IDS.add("the-hobbit");
 
@@ -119,7 +119,7 @@ public class TrailerAddictApiTest {
         LOG.info("getActor");
 
         for (String id : ACTOR_IDS) {
-            LOG.log(Level.INFO, "Actor: {0}", id);
+            LOG.debug("Actor: {}", id);
             List<Trailer> trailers = TrailerAddictApi.getActor(id, NUMBER_OF_TRAILERS);
             assertNotNull("List of trailers is null for " + id, trailers);
             assertFalse("List of trailers is empty for " + id, trailers.isEmpty());
