@@ -6,6 +6,14 @@ Author: Stuart Boston (Omertron AT Gmail DOT com)
 API for the Trailer Addict website
 http://www.traileraddict.com/trailerapi
 
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=Omertron&url=https://github.com/Omertron/api-traileraddict&title=TrailerAddict API&language=&tags=github&category=software)
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Omertron/api-traileraddict/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
+***
+Usage
+-----
+
 There are five methods supported
 * Featured
 * Film
