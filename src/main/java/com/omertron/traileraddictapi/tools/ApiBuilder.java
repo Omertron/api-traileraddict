@@ -136,6 +136,8 @@ public final class ApiBuilder {
      * @param featured
      * @param count
      * @param width
+     * @return
+     * @throws TrailerAddictException
      */
     public static URL getFeaturedUrl(String featured, int count, int width) throws TrailerAddictException {
         if (featured.equalsIgnoreCase(FEATURED_YES) || featured.equalsIgnoreCase(FEATURED_NO)) {
@@ -151,6 +153,8 @@ public final class ApiBuilder {
      *
      * @param featured
      * @param count
+     * @return
+     * @throws TrailerAddictException
      */
     public static URL getFeaturedUrl(String featured, int count) throws TrailerAddictException {
         return getFeaturedUrl(featured, count, DEFAULT_INT);
@@ -160,8 +164,8 @@ public final class ApiBuilder {
      * Get the featured URL with the default width & count
      *
      * @param featured
-     * @param count
-     *
+     * @return
+     * @throws TrailerAddictException
      */
     public static URL getFeaturedUrl(String featured) throws TrailerAddictException {
         return getFeaturedUrl(featured, DEFAULT_INT, DEFAULT_INT);
@@ -173,7 +177,8 @@ public final class ApiBuilder {
      * @param filmId
      * @param count
      * @param width
-     *
+     * @return
+     * @throws TrailerAddictException
      */
     public static URL getFilmUrl(String filmId, int count, int width) throws TrailerAddictException {
         return buildUrl(PARAMETER_FILM, filmId, count, width);
@@ -184,7 +189,8 @@ public final class ApiBuilder {
      *
      * @param filmId
      * @param count
-     *
+     * @return
+     * @throws TrailerAddictException
      */
     public static URL getFilmUrl(String filmId, int count) throws TrailerAddictException {
         return getFilmUrl(filmId, count, DEFAULT_INT);
@@ -194,7 +200,8 @@ public final class ApiBuilder {
      * Get the film URL with the default width & count
      *
      * @param filmId
-     *
+     * @return
+     * @throws TrailerAddictException
      */
     public static URL getFilmUrl(String filmId) throws TrailerAddictException {
         return getFilmUrl(filmId, DEFAULT_INT, DEFAULT_INT);
@@ -206,7 +213,8 @@ public final class ApiBuilder {
      * @param imdbId
      * @param count
      * @param width
-     *
+     * @return
+     * @throws TrailerAddictException
      */
     public static URL getImdbUrl(String imdbId, int count, int width) throws TrailerAddictException {
         String validatedImdb;
@@ -224,7 +232,8 @@ public final class ApiBuilder {
      *
      * @param imdbId
      * @param count
-     *
+     * @return
+     * @throws TrailerAddictException
      */
     public static URL getImdbUrl(String imdbId, int count) throws TrailerAddictException {
         return getImdbUrl(imdbId, count, DEFAULT_INT);
@@ -234,7 +243,8 @@ public final class ApiBuilder {
      * Get the film URL using the IMDB ID with the default width & count
      *
      * @param imdbId
-     *
+     * @return
+     * @throws TrailerAddictException
      */
     public static URL getImdbUrl(String imdbId) throws TrailerAddictException {
         return getImdbUrl(imdbId, DEFAULT_INT, DEFAULT_INT);
@@ -246,7 +256,8 @@ public final class ApiBuilder {
      * @param actorId
      * @param count
      * @param width
-     *
+     * @return
+     * @throws TrailerAddictException
      */
     public static URL getActorUrl(String actorId, int count, int width) throws TrailerAddictException {
         return buildUrl(PARAMETER_ACTOR, actorId, count, width);
@@ -257,7 +268,8 @@ public final class ApiBuilder {
      *
      * @param actorId
      * @param count
-     *
+     * @return
+     * @throws TrailerAddictException
      */
     public static URL getActorUrl(String actorId, int count) throws TrailerAddictException {
         return getActorUrl(actorId, count, DEFAULT_INT);
@@ -267,7 +279,8 @@ public final class ApiBuilder {
      * Get the Actor URL with the default width & count
      *
      * @param actorId
-     *
+     * @return
+     * @throws TrailerAddictException
      */
     public static URL getActorUrl(String actorId) throws TrailerAddictException {
         return getActorUrl(actorId, DEFAULT_INT, DEFAULT_INT);
@@ -277,7 +290,7 @@ public final class ApiBuilder {
      * Convert the passed URL from the standard trailer URL to the simple API URL
      *
      * @param searchUrl
-     *
+     * @return
      * @throws TrailerAddictException
      */
     public static URL getSimpleUrl(String searchUrl) throws TrailerAddictException {

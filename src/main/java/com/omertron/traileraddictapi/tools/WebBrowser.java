@@ -46,8 +46,8 @@ import org.slf4j.LoggerFactory;
 public final class WebBrowser {
 
     private static final Logger LOG = LoggerFactory.getLogger(WebBrowser.class);
-    private static Map<String, String> browserProperties = new HashMap<String, String>();
-    private static Map<String, Map<String, String>> cookies = new HashMap<String, Map<String, String>>();
+    private static final Map<String, String> BROWSER_PROPERTIES = new HashMap<String, String>();
+    private static final Map<String, Map<String, String>> COOKIES = new HashMap<String, Map<String, String>>();
     private static String proxyHost = null;
     private static String proxyPort = null;
     private static String proxyUsername = null;
@@ -66,8 +66,8 @@ public final class WebBrowser {
      * Populate the browser properties
      */
     private static void populateBrowserProperties() {
-        if (browserProperties.isEmpty()) {
-            browserProperties.put("User-Agent", "Mozilla/5.25 Netscape/5.0 (Windows; I; Win95)");
+        if (BROWSER_PROPERTIES.isEmpty()) {
+            BROWSER_PROPERTIES.put("User-Agent", "Mozilla/5.25 Netscape/5.0 (Windows; I; Win95)");
         }
     }
 
@@ -145,7 +145,7 @@ public final class WebBrowser {
         populateBrowserProperties();
 
         // send browser properties
-        for (Map.Entry<String, String> browserProperty : browserProperties.entrySet()) {
+        for (Map.Entry<String, String> browserProperty : BROWSER_PROPERTIES.entrySet()) {
             cnx.setRequestProperty(browserProperty.getKey(), browserProperty.getValue());
         }
         // send cookies
@@ -158,7 +158,7 @@ public final class WebBrowser {
     private static String createCookieHeader(URLConnection cnx) {
         String host = cnx.getURL().getHost();
         StringBuilder cookiesHeader = new StringBuilder();
-        for (Map.Entry<String, Map<String, String>> domainCookies : cookies.entrySet()) {
+        for (Map.Entry<String, Map<String, String>> domainCookies : COOKIES.entrySet()) {
             if (host.endsWith(domainCookies.getKey())) {
                 for (Map.Entry<String, String> cookie : domainCookies.getValue().entrySet()) {
                     cookiesHeader.append(cookie.getKey());
@@ -198,10 +198,10 @@ public final class WebBrowser {
                             // if domain isn't set take current host
                             cookieDomain = cnx.getURL().getHost();
                         }
-                        Map<String, String> domainCookies = cookies.get(cookieDomain);
+                        Map<String, String> domainCookies = COOKIES.get(cookieDomain);
                         if (domainCookies == null) {
                             domainCookies = new HashMap<String, String>();
-                            cookies.put(cookieDomain, domainCookies);
+                            COOKIES.put(cookieDomain, domainCookies);
                         }
                         // add or replace cookie
                         domainCookies.put(cookieName, cookieValue);

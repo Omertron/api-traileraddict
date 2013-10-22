@@ -56,7 +56,7 @@ public class DOMHelper {
      *
      * @param element
      * @param tagName
-
+     * @return
      */
     public static String getValueFromElement(Element element, String tagName) {
         NodeList elementNodeList = element.getElementsByTagName(tagName);
@@ -80,8 +80,8 @@ public class DOMHelper {
      * Get a DOM document from the supplied URL
      *
      * @param url
-
-     * @throws Exception
+     * @return
+     * @throws TrailerAddictException
      */
     public static synchronized Document getEventDocFromUrl(String url) throws TrailerAddictException {
         String webPage;
@@ -109,12 +109,11 @@ public class DOMHelper {
         } catch (IOException error) {
             throw new TrailerAddictException(TrailerAddictExceptionType.PARSE_ERROR, "Unable to parse TheTVDb response, please try again later.", error);
         } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException error) {
-                    // Input Stream was already closed or null
-                }
+            try {
+                in.close();
+            } catch (IOException ex) {
+                // Input Stream was already closed or null
+                LOG.trace("Stream already closed for getEventDocFromUrl");
             }
         }
 
@@ -125,7 +124,7 @@ public class DOMHelper {
      * Convert a DOM document to a string
      *
      * @param doc
-
+     * @return
      * @throws TransformerException
      */
     public static String convertDocToString(Document doc) throws TransformerException {
@@ -148,7 +147,7 @@ public class DOMHelper {
      *
      * @param doc The document to save
      * @param localFile The file to write to
-
+     * @return
      */
     public static boolean writeDocumentToFile(Document doc, String localFile) {
         try {

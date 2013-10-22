@@ -25,6 +25,8 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class Trailer implements Serializable {
 
@@ -237,6 +239,8 @@ public class Trailer implements Serializable {
      * Get the URL to download the trailer from.
      *
      * This returns the page in which the trailer URL can be found
+     *
+     * @return
      */
     public String getTrailerDownloadUrl() {
         return (TRAILER_URL + trailerId);
@@ -257,6 +261,6 @@ public class Trailer implements Serializable {
 
     @Override
     public String toString() {
-        return "Trailer{" + "combinedTitle=" + combinedTitle + ", link=" + link + ", publishDate=" + publishDate + ", trailerId=" + trailerId + ", embed=" + embed + ", trailerTitle=" + trailerTitle + ", filmTitle=" + filmTitle + ", description=" + description + ", studio=" + studio + ", directors=" + directors + ", writers=" + writers + ", cast=" + cast + ", releaseDate=" + releaseDate + '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }
