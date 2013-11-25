@@ -32,6 +32,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
+import org.yamj.api.common.http.CommonHttpClient;
+import org.yamj.api.common.http.DefaultPoolingHttpClient;
 
 /**
  * Generic set of routines to process the DOM model data
@@ -44,6 +46,7 @@ public class DOMHelper {
     private static final Logger LOG = LoggerFactory.getLogger(DOMHelper.class);
     private static final String YES = "yes";
     private static final String ENCODING = "UTF-8";
+    private static final CommonHttpClient HTTP_CLIENT = new DefaultPoolingHttpClient();
 
     // Hide the constructor
     protected DOMHelper() {
@@ -88,10 +91,12 @@ public class DOMHelper {
         InputStream in = null;
 
         try {
-            webPage = WebBrowser.request(url);
+            webPage = HTTP_CLIENT.requestContent(url);
             in = new ByteArrayInputStream(webPage.getBytes(ENCODING));
         } catch (UnsupportedEncodingException ex) {
             throw new TrailerAddictException(TrailerAddictExceptionType.INVALID_URL, "Unable to encode URL: " + url, ex);
+        } catch (IOException ex) {
+            throw new TrailerAddictException(TrailerAddictExceptionType.INVALID_URL, "Unable to download URL: " + url, ex);
         }
 
         Document doc = null;

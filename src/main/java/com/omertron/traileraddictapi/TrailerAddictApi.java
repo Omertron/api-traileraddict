@@ -27,7 +27,6 @@ import java.util.List;
 
 public final class TrailerAddictApi {
 
-//    private static final Logger LOGGER = LoggerFactory.getLogger(TrailerAddictApi.class);
     private static final int DEFAULT_WIDTH = -1;
     private static final int DEFAULT_COUNT = 1;
 
@@ -174,7 +173,7 @@ public final class TrailerAddictApi {
      * @param featured Either 'yes' or 'no'
      * @param count The number of trailers to return
      * @param width The width to be used in the embedded URL
-     * @return 
+     * @return
      * @throws TrailerAddictException
      */
     public static List<Trailer> getFeatured(String featured, int count, int width) throws TrailerAddictException {
