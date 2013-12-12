@@ -50,8 +50,7 @@ public final class TrailerAddictParser {
             LOG.trace("Attempting to get trailer XML from " + url.toString());
             doc = DOMHelper.getEventDocFromUrl(url.toString());
         } catch (TrailerAddictException ex) {
-            LOG.trace("Exception processing document; " + url.toString());
-            LOG.trace("Exception: " + ex.getResponse());
+            LOG.trace("Exception processing document; " + url.toString(), ex);
             return trailers;
         }
 
