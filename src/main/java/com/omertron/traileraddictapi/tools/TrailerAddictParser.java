@@ -79,10 +79,10 @@ public final class TrailerAddictParser {
                 trailer.setTrailerTitle(DOMHelper.getValueFromElement(eTrailer, "video_title"));
                 trailer.setDescription(DOMHelper.getValueFromElement(eTrailer, "description"));
                 trailer.setFilmTitle(DOMHelper.getValueFromElement(eTrailer, "film"));
-                trailer.addEmbed(TrailerSize.standard, DOMHelper.getValueFromElement(eTrailer, "embed_standard"));
-                trailer.addEmbed(TrailerSize.small, DOMHelper.getValueFromElement(eTrailer, "embed_small"));
-                trailer.addEmbed(TrailerSize.medium, DOMHelper.getValueFromElement(eTrailer, "embed_medium"));
-                trailer.addEmbed(TrailerSize.large, DOMHelper.getValueFromElement(eTrailer, "embed_large"));
+                trailer.addEmbed(TrailerSize.STANDARD, DOMHelper.getValueFromElement(eTrailer, "embed_standard"));
+                trailer.addEmbed(TrailerSize.SMALL, DOMHelper.getValueFromElement(eTrailer, "embed_small"));
+                trailer.addEmbed(TrailerSize.MEDIUM, DOMHelper.getValueFromElement(eTrailer, "embed_medium"));
+                trailer.addEmbed(TrailerSize.LARGE, DOMHelper.getValueFromElement(eTrailer, "embed_large"));
                 trailer.setDirectors(DOMHelper.getValueFromElement(eTrailer, "director"));
                 trailer.setWriters(DOMHelper.getValueFromElement(eTrailer, "writer"));
                 trailer.setCast(DOMHelper.getValueFromElement(eTrailer, "cast"));

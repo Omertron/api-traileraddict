@@ -25,7 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -81,6 +83,8 @@ public class TrailerAddictApiTest {
 
     /**
      * Test of getFilm method, of class TrailerAddictApi.
+     *
+     * @throws com.omertron.traileraddictapi.TrailerAddictException
      */
     @Test
     public void testGetFilm() throws TrailerAddictException {
@@ -96,6 +100,8 @@ public class TrailerAddictApiTest {
 
     /**
      * Test of getFilm method, of class TrailerAddictApi.
+     *
+     * @throws com.omertron.traileraddictapi.TrailerAddictException
      */
     @Test
     public void testGetFilmWidth() throws TrailerAddictException {
@@ -106,13 +112,15 @@ public class TrailerAddictApiTest {
         assertNotNull("List of trailers is null for " + id, trailers);
         assertFalse("List of trailers is empty for " + id, trailers.isEmpty());
         Trailer t = trailers.get(0);
-        String embed = t.getEmbed(TrailerSize.custom);
+        String embed = t.getEmbed(TrailerSize.CUSTOM);
         assertNotNull("No custom trailer size found for " + id, embed);
         assertTrue("Incorrect width found in results for " + id, embed.contains(TEST_WIDTH_COMPARE));
     }
 
     /**
      * Test of getActor method, of class TrailerAddictApi.
+     *
+     * @throws com.omertron.traileraddictapi.TrailerAddictException
      */
     @Test
     public void testGetActor() throws TrailerAddictException {
@@ -129,6 +137,8 @@ public class TrailerAddictApiTest {
 
     /**
      * Test of getActor method, of class TrailerAddictApi.
+     *
+     * @throws com.omertron.traileraddictapi.TrailerAddictException
      */
     @Test
     public void testGetActorWidth() throws TrailerAddictException {
@@ -139,13 +149,15 @@ public class TrailerAddictApiTest {
         assertNotNull("List of trailers is null for " + id, trailers);
         assertFalse("List of trailers is empty for " + id, trailers.isEmpty());
         Trailer t = trailers.get(0);
-        String embed = t.getEmbed(TrailerSize.custom);
+        String embed = t.getEmbed(TrailerSize.CUSTOM);
         assertNotNull("No custom trailer size found for " + id, embed);
         assertTrue("Incorrect width found in results for " + id, embed.contains(TEST_WIDTH_COMPARE));
     }
 
     /**
      * Test of getFilmImdb method, of class TrailerAddictApi.
+     *
+     * @throws com.omertron.traileraddictapi.TrailerAddictException
      */
     @Test
     public void testGetFilmImdb() throws TrailerAddictException {
@@ -161,6 +173,8 @@ public class TrailerAddictApiTest {
 
     /**
      * Test of getFilmImdb method, of class TrailerAddictApi.
+     *
+     * @throws com.omertron.traileraddictapi.TrailerAddictException
      */
     @Test
     public void testGetFilmImdbWidth() throws TrailerAddictException {
@@ -171,13 +185,15 @@ public class TrailerAddictApiTest {
         assertNotNull("List of trailers is null for " + id, trailers);
         assertFalse("List of trailers is empty for " + id, trailers.isEmpty());
         Trailer t = trailers.get(0);
-        String embed = t.getEmbed(TrailerSize.custom);
+        String embed = t.getEmbed(TrailerSize.CUSTOM);
         assertNotNull("No custom trailer size found for " + id, embed);
         assertTrue("Incorrect width found in results for " + id, embed.contains(TEST_WIDTH_COMPARE));
     }
 
     /**
      * Test of getFeatured method, of class TrailerAddictApi.
+     *
+     * @throws com.omertron.traileraddictapi.TrailerAddictException
      */
     @Test
     public void testGetFeatured() throws TrailerAddictException {
@@ -193,6 +209,8 @@ public class TrailerAddictApiTest {
 
     /**
      * Test of getFeatured method, of class TrailerAddictApi.
+     *
+     * @throws com.omertron.traileraddictapi.TrailerAddictException
      */
     @Test
     public void testGetFeaturedWidth() throws TrailerAddictException {
@@ -203,7 +221,7 @@ public class TrailerAddictApiTest {
             assertNotNull("List of trailers is null for " + id, trailers);
             assertFalse("List of trailers is empty for " + id, trailers.isEmpty());
             Trailer t = trailers.get(0);
-            String embed = t.getEmbed(TrailerSize.custom);
+            String embed = t.getEmbed(TrailerSize.CUSTOM);
             assertNotNull("No custom trailer size found for " + id, embed);
             assertTrue("Incorrect width found in results for " + id, embed.contains(TEST_WIDTH_COMPARE));
         }
@@ -211,6 +229,8 @@ public class TrailerAddictApiTest {
 
     /**
      * Test of getSimpleApi method, of class TrailerAddictApi.
+     *
+     * @throws com.omertron.traileraddictapi.TrailerAddictException
      */
     @Test
     public void testGetSimpleApi_String() throws TrailerAddictException {
@@ -222,6 +242,7 @@ public class TrailerAddictApiTest {
 
     /**
      * Test of getSimpleApi method, of class TrailerAddictApi.
+     * @throws com.omertron.traileraddictapi.TrailerAddictException
      */
     @Test
     public void testGetSimpleApi_Trailer() throws TrailerAddictException {

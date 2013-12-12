@@ -105,12 +105,11 @@ public class DOMHelper {
      * @throws TrailerAddictException
      */
     public static synchronized Document getEventDocFromUrl(String url) throws TrailerAddictException {
-        String webPage;
         InputStream in = null;
-
         Document doc = null;
+
         try {
-            webPage = HTTP_CLIENT.requestContent(url);
+            String webPage = HTTP_CLIENT.requestContent(url);
             in = new ByteArrayInputStream(webPage.getBytes(ENCODING));
 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

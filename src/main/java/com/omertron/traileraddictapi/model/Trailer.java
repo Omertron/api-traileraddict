@@ -138,7 +138,7 @@ public class Trailer implements Serializable {
     }
 
     public void addEmbed(String embedData) {
-        this.embed.put(TrailerSize.custom, embedData);
+        this.embed.put(TrailerSize.CUSTOM, embedData);
     }
 
     public void addEmbed(TrailerSize size, String embedData) {

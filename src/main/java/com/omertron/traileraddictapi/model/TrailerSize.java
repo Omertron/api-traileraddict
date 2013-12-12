@@ -21,5 +21,9 @@ package com.omertron.traileraddictapi.model;
 
 public enum TrailerSize {
 
-    small, medium, large, standard, custom
+    SMALL,
+    MEDIUM,
+    LARGE,
+    STANDARD,
+    CUSTOM;
 }
