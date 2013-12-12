@@ -120,19 +120,13 @@ public final class ApiBuilder {
      * @param count
      */
     private static int validateCount(int count) {
-        if (count == DEFAULT_INT) {
-            return count;
-        }
-
+        int value = count;
         if (count > COUNT_MAX) {
-            return COUNT_MAX;
+            value = COUNT_MAX;
+        } else if (count < DEFAULT_INT) {
+            value = DEFAULT_INT;
         }
-
-        if (count < DEFAULT_INT) {
-            return DEFAULT_INT;
-        }
-
-        return count;
+        return value;
     }
 
     /**

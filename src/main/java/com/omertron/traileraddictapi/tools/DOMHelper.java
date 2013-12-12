@@ -81,20 +81,20 @@ public class DOMHelper {
      */
     public static String getValueFromElement(Element element, String tagName) {
         NodeList elementNodeList = element.getElementsByTagName(tagName);
-        if (elementNodeList == null) {
-            return "";
-        } else {
-            Element tagElement = (Element) elementNodeList.item(0);
-            if (tagElement == null) {
-                return "";
-            }
 
-            NodeList tagNodeList = tagElement.getChildNodes();
-            if (tagNodeList == null || tagNodeList.getLength() == 0) {
-                return "";
+        String value = "";
+
+        if (elementNodeList != null) {
+            Element tagElement = (Element) elementNodeList.item(0);
+            if (tagElement != null) {
+                NodeList tagNodeList = tagElement.getChildNodes();
+                if (tagNodeList != null && tagNodeList.getLength() > 0) {
+                    value = ((Node) tagNodeList.item(0)).getNodeValue();
+                }
             }
-            return ((Node) tagNodeList.item(0)).getNodeValue();
         }
+
+        return value;
     }
 
     /**
@@ -108,23 +108,18 @@ public class DOMHelper {
         String webPage;
         InputStream in = null;
 
+        Document doc = null;
         try {
             webPage = HTTP_CLIENT.requestContent(url);
             in = new ByteArrayInputStream(webPage.getBytes(ENCODING));
-        } catch (UnsupportedEncodingException ex) {
-            throw new TrailerAddictException(TrailerAddictExceptionType.INVALID_URL, "Unable to encode URL: " + url, ex);
-        } catch (IOException ex) {
-            throw new TrailerAddictException(TrailerAddictExceptionType.INVALID_URL, "Unable to download URL: " + url, ex);
-        }
 
-        Document doc = null;
-
-        try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
 
             doc = db.parse(in);
             doc.getDocumentElement().normalize();
+        } catch (UnsupportedEncodingException ex) {
+            throw new TrailerAddictException(TrailerAddictExceptionType.INVALID_URL, "Unable to encode URL: " + url, ex);
         } catch (ParserConfigurationException error) {
             throw new TrailerAddictException(TrailerAddictExceptionType.PARSE_ERROR, UNABLE_TO_PARSE, error);
         } catch (SAXException error) {
@@ -133,7 +128,9 @@ public class DOMHelper {
             throw new TrailerAddictException(TrailerAddictExceptionType.PARSE_ERROR, UNABLE_TO_PARSE, error);
         } finally {
             try {
-                in.close();
+                if (in != null) {
+                    in.close();
+                }
             } catch (IOException ex) {
                 // Input Stream was already closed or null
                 LOG.trace("Stream already closed for getEventDocFromUrl", ex);
