@@ -60,6 +60,11 @@ public class DOMHelper {
     private static final String YES = "yes";
     private static final String ENCODING = "UTF-8";
     private static final CommonHttpClient HTTP_CLIENT = new DefaultPoolingHttpClient();
+    /*
+     * Constants
+     */
+    private static final String UNABLE_TO_PARSE = "Unable to parse TheTVDb response, please try again later.";
+    private static final String ERROR_WRITING_DOC = "Error writing the document to ";
 
     // Hide the constructor
     protected DOMHelper() {
@@ -121,11 +126,11 @@ public class DOMHelper {
             doc = db.parse(in);
             doc.getDocumentElement().normalize();
         } catch (ParserConfigurationException error) {
-            throw new TrailerAddictException(TrailerAddictExceptionType.PARSE_ERROR, "Unable to parse TheTVDb response, please try again later.", error);
+            throw new TrailerAddictException(TrailerAddictExceptionType.PARSE_ERROR, UNABLE_TO_PARSE, error);
         } catch (SAXException error) {
-            throw new TrailerAddictException(TrailerAddictExceptionType.PARSE_ERROR, "Unable to parse TheTVDb response, please try again later.", error);
+            throw new TrailerAddictException(TrailerAddictExceptionType.PARSE_ERROR, UNABLE_TO_PARSE, error);
         } catch (IOException error) {
-            throw new TrailerAddictException(TrailerAddictExceptionType.PARSE_ERROR, "Unable to parse TheTVDb response, please try again later.", error);
+            throw new TrailerAddictException(TrailerAddictExceptionType.PARSE_ERROR, UNABLE_TO_PARSE, error);
         } finally {
             try {
                 in.close();
@@ -176,10 +181,10 @@ public class DOMHelper {
             trans.transform(new DOMSource(doc), new StreamResult(new File(localFile)));
             return true;
         } catch (TransformerConfigurationException ex) {
-            LOG.warn("Error writing the document to " + localFile, ex);
+            LOG.warn(ERROR_WRITING_DOC + localFile, ex);
             return false;
         } catch (TransformerException ex) {
-            LOG.warn("Error writing the document to " + localFile, ex);
+            LOG.warn(ERROR_WRITING_DOC + localFile, ex);
             return false;
         }
     }
