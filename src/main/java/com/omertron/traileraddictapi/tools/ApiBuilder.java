@@ -63,8 +63,8 @@ public final class ApiBuilder {
     /*
      * Constants
      */
-    private static final String FAILED_TO_CREATE_URL = "Failed to create URL ";
-    private static final String URL = "URL: ";
+    private static final String FAILED_TO_CREATE_URL = "Failed to create URL: {} - {}";
+    private static final String URL = "URL: {}";
 
     private ApiBuilder() {
         // prevents calls from subclass
@@ -104,10 +104,10 @@ public final class ApiBuilder {
         }
 
         try {
-            LOG.trace(URL + searchUrl.toString());
+            LOG.trace(URL, searchUrl.toString());
             return new URL(searchUrl.toString());
         } catch (MalformedURLException ex) {
-            LOG.warn(FAILED_TO_CREATE_URL + searchUrl.toString() + " - " + ex.toString());
+            LOG.warn(FAILED_TO_CREATE_URL, searchUrl.toString(), ex.toString());
             throw new TrailerAddictException(TrailerAddictExceptionType.INVALID_URL, searchUrl.toString(), ex);
         }
     }
@@ -294,10 +294,10 @@ public final class ApiBuilder {
      */
     public static URL getSimpleUrl(String searchUrl) throws TrailerAddictException {
         try {
-            LOG.trace(URL + searchUrl);
+            LOG.trace(URL, searchUrl);
             return new URL(searchUrl.replace("http://www.", "http://simpleapi."));
         } catch (MalformedURLException ex) {
-            LOG.warn(FAILED_TO_CREATE_URL + searchUrl + " - " + ex.toString());
+            LOG.warn(FAILED_TO_CREATE_URL, searchUrl, ex.toString());
             throw new TrailerAddictException(TrailerAddictExceptionType.INVALID_URL, searchUrl, ex);
         }
     }

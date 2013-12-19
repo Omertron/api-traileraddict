@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -64,7 +65,7 @@ public class DOMHelper {
      * Constants
      */
     private static final String UNABLE_TO_PARSE = "Unable to parse TheTVDb response, please try again later.";
-    private static final String ERROR_WRITING_DOC = "Error writing the document to ";
+    private static final String ERROR_WRITING_DOC = "Error writing the document to {}";
 
     // Hide the constructor
     protected DOMHelper() {
@@ -109,7 +110,7 @@ public class DOMHelper {
         Document doc = null;
 
         try {
-            String webPage = HTTP_CLIENT.requestContent(url);
+            String webPage = HTTP_CLIENT.requestContent(url, Charset.forName(ENCODING));
             in = new ByteArrayInputStream(webPage.getBytes(ENCODING));
 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -177,10 +178,10 @@ public class DOMHelper {
             trans.transform(new DOMSource(doc), new StreamResult(new File(localFile)));
             return true;
         } catch (TransformerConfigurationException ex) {
-            LOG.warn(ERROR_WRITING_DOC + localFile, ex);
+            LOG.warn(ERROR_WRITING_DOC, localFile, ex);
             return false;
         } catch (TransformerException ex) {
-            LOG.warn(ERROR_WRITING_DOC + localFile, ex);
+            LOG.warn(ERROR_WRITING_DOC, localFile, ex);
             return false;
         }
     }

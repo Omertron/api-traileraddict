@@ -47,10 +47,10 @@ public final class TrailerAddictParser {
         List<Trailer> trailers = new ArrayList<Trailer>();
 
         try {
-            LOG.trace("Attempting to get trailer XML from " + url.toString());
+            LOG.trace("Attempting to get trailer XML from {}", url.toString());
             doc = DOMHelper.getEventDocFromUrl(url.toString());
         } catch (TrailerAddictException ex) {
-            LOG.trace("Exception processing document; " + url.toString(), ex);
+            LOG.trace("Exception processing document: {}", url.toString(), ex);
             return trailers;
         }
 
@@ -94,7 +94,7 @@ public final class TrailerAddictParser {
             }
         }
 
-        LOG.trace("Found " + trailers.size() + " trailers for " + url.toString());
+        LOG.trace("Found {} trailers for {}", trailers.size(), url.toString());
         return trailers;
 
     }

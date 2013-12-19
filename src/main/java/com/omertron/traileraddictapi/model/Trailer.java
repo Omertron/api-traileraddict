@@ -30,9 +30,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class Trailer implements Serializable {
 
-    /*
-     * Logger
-     */
     private static final String TRAILER_URL = "http://www.traileraddict.com/fvar.php?tid=";
     /*
      * Serial Version
