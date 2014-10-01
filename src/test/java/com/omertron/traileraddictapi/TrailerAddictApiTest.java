@@ -30,11 +30,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Test class for Trailer Addict API
  *
  * @author stuart.boston
  */
@@ -48,7 +50,6 @@ public class TrailerAddictApiTest {
     private static final int NUMBER_OF_TRAILERS = 4;
     private static final int REQUIRED_WIDTH = 720;
     private static final String TEST_WIDTH_COMPARE = "width=\"" + REQUIRED_WIDTH + "\"";
-    private static final String TEST_TRAILER_URL = "http://www.traileraddict.com/trailer/avatar/trailer-b";
 
     public TrailerAddictApiTest() {
     }
@@ -232,16 +233,13 @@ public class TrailerAddictApiTest {
      *
      * @throws com.omertron.traileraddictapi.TrailerAddictException
      */
-    @Test
+    @Ignore("Tested elsewhere")
     public void testGetSimpleApi_String() throws TrailerAddictException {
-        LOG.info("getSimpleApi (Via link string)");
-        Trailer trailer = TrailerAddictApi.getSimpleApi(TEST_TRAILER_URL);
-        assertNotNull("Simple trailer is null", trailer);
-        assertFalse("Simple trailer is empty", trailer.getEmbed().isEmpty());
     }
 
     /**
      * Test of getSimpleApi method, of class TrailerAddictApi.
+     *
      * @throws com.omertron.traileraddictapi.TrailerAddictException
      */
     @Test
