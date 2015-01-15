@@ -48,6 +48,7 @@ import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 import org.yamj.api.common.http.CommonHttpClient;
 import org.yamj.api.common.http.DefaultPoolingHttpClient;
+import org.yamj.api.common.http.DigestedResponse;
 
 /**
  * Generic set of routines to process the DOM model data
@@ -110,8 +111,15 @@ public class DOMHelper {
         Document doc = null;
 
         try {
-            String webPage = HTTP_CLIENT.requestContent(url, Charset.forName(ENCODING));
-            in = new ByteArrayInputStream(webPage.getBytes(ENCODING));
+            DigestedResponse response = HTTP_CLIENT.requestContent(url, Charset.forName(ENCODING));
+
+            if (response.getStatusCode() >= 500) {
+                throw new TrailerAddictException(TrailerAddictExceptionType.HTTP_503_ERROR, url);
+            } else if (response.getStatusCode() >= 300) {
+                throw new TrailerAddictException(TrailerAddictExceptionType.HTTP_404_ERROR, url);
+            }
+
+            in = new ByteArrayInputStream(response.getContent().getBytes(ENCODING));
 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
