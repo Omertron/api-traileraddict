@@ -20,7 +20,6 @@
 package com.omertron.traileraddictapi.tools;
 
 import com.omertron.traileraddictapi.TrailerAddictException;
-import com.omertron.traileraddictapi.TrailerAddictException.TrailerAddictExceptionType;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -46,6 +45,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
+import org.yamj.api.common.exception.ApiExceptionType;
 import org.yamj.api.common.http.CommonHttpClient;
 import org.yamj.api.common.http.DefaultPoolingHttpClient;
 import org.yamj.api.common.http.DigestedResponse;
@@ -114,9 +114,9 @@ public class DOMHelper {
             DigestedResponse response = HTTP_CLIENT.requestContent(url, Charset.forName(ENCODING));
 
             if (response.getStatusCode() >= 500) {
-                throw new TrailerAddictException(TrailerAddictExceptionType.HTTP_503_ERROR, url);
+                throw new TrailerAddictException(ApiExceptionType.HTTP_503_ERROR, url);
             } else if (response.getStatusCode() >= 300) {
-                throw new TrailerAddictException(TrailerAddictExceptionType.HTTP_404_ERROR, url);
+                throw new TrailerAddictException(ApiExceptionType.HTTP_404_ERROR, url);
             }
 
             in = new ByteArrayInputStream(response.getContent().getBytes(ENCODING));
@@ -127,13 +127,13 @@ public class DOMHelper {
             doc = db.parse(in);
             doc.getDocumentElement().normalize();
         } catch (UnsupportedEncodingException ex) {
-            throw new TrailerAddictException(TrailerAddictExceptionType.INVALID_URL, "Unable to encode URL: " + url, ex);
+            throw new TrailerAddictException(ApiExceptionType.INVALID_URL, "Unable to encode URL", url, ex);
         } catch (ParserConfigurationException error) {
-            throw new TrailerAddictException(TrailerAddictExceptionType.PARSE_ERROR, UNABLE_TO_PARSE, error);
+            throw new TrailerAddictException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, error);
         } catch (SAXException error) {
-            throw new TrailerAddictException(TrailerAddictExceptionType.PARSE_ERROR, UNABLE_TO_PARSE, error);
+            throw new TrailerAddictException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, error);
         } catch (IOException error) {
-            throw new TrailerAddictException(TrailerAddictExceptionType.PARSE_ERROR, UNABLE_TO_PARSE, error);
+            throw new TrailerAddictException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, error);
         } finally {
             try {
                 if (in != null) {

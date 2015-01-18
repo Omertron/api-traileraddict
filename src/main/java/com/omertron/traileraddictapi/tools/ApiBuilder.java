@@ -20,11 +20,11 @@
 package com.omertron.traileraddictapi.tools;
 
 import com.omertron.traileraddictapi.TrailerAddictException;
-import com.omertron.traileraddictapi.TrailerAddictException.TrailerAddictExceptionType;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.yamj.api.common.exception.ApiExceptionType;
 
 /**
  * Build the API URL that is used to fetch the data
@@ -108,7 +108,7 @@ public final class ApiBuilder {
             return new URL(searchUrl.toString());
         } catch (MalformedURLException ex) {
             LOG.warn(FAILED_TO_CREATE_URL, searchUrl.toString(), ex.toString());
-            throw new TrailerAddictException(TrailerAddictExceptionType.INVALID_URL, searchUrl.toString(), ex);
+            throw new TrailerAddictException(ApiExceptionType.INVALID_URL, ex.getMessage(), searchUrl.toString(), ex);
         }
     }
 
@@ -298,7 +298,7 @@ public final class ApiBuilder {
             return new URL(searchUrl.replace("http://www.", "http://simpleapi."));
         } catch (MalformedURLException ex) {
             LOG.warn(FAILED_TO_CREATE_URL, searchUrl, ex.toString());
-            throw new TrailerAddictException(TrailerAddictExceptionType.INVALID_URL, searchUrl, ex);
+            throw new TrailerAddictException(ApiExceptionType.INVALID_URL, ex.getMessage(), searchUrl, ex);
         }
     }
 }

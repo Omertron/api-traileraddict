@@ -19,42 +19,45 @@
  */
 package com.omertron.traileraddictapi;
 
-public class TrailerAddictException extends Exception {
+import java.net.URL;
+import org.yamj.api.common.exception.ApiException;
+import org.yamj.api.common.exception.ApiExceptionType;
 
-    private static final long serialVersionUID = -8952129102483143278L;
+public class TrailerAddictException extends ApiException {
 
-    public enum TrailerAddictExceptionType {
-
-        UNKNOWN_CAUSE,
-        INVALID_URL,
-        HTTP_404_ERROR,
-        HTTP_503_ERROR,
-        ID_NOT_FOUND,
-        PARSE_ERROR,
-        CONNECTION_ERROR,
-        INVALID_IMAGE;
+    public TrailerAddictException(ApiExceptionType exceptionType, String response) {
+        super(exceptionType, response);
     }
 
-    private final TrailerAddictExceptionType exceptionType;
-    private final String response;
-
-    public TrailerAddictException(final TrailerAddictExceptionType exceptionType, final String response) {
-        super();
-        this.exceptionType = exceptionType;
-        this.response = response;
+    public TrailerAddictException(ApiExceptionType exceptionType, String response, URL url) {
+        super(exceptionType, response, url);
     }
 
-    public TrailerAddictException(final TrailerAddictExceptionType exceptionType, final String response, final Throwable cause) {
-        super(cause);
-        this.exceptionType = exceptionType;
-        this.response = response;
+    public TrailerAddictException(ApiExceptionType exceptionType, String response, int responseCode, URL url) {
+        super(exceptionType, response, responseCode, url);
     }
 
-    public TrailerAddictExceptionType getExceptionType() {
-        return exceptionType;
+    public TrailerAddictException(ApiExceptionType exceptionType, String response, String url) {
+        super(exceptionType, response, url);
     }
 
-    public String getResponse() {
-        return response;
+    public TrailerAddictException(ApiExceptionType exceptionType, String response, int responseCode, String url) {
+        super(exceptionType, response, responseCode, url);
+    }
+
+    public TrailerAddictException(ApiExceptionType exceptionType, String response, URL url, Throwable cause) {
+        super(exceptionType, response, url, cause);
+    }
+
+    public TrailerAddictException(ApiExceptionType exceptionType, String response, int responseCode, URL url, Throwable cause) {
+        super(exceptionType, response, responseCode, url, cause);
+    }
+
+    public TrailerAddictException(ApiExceptionType exceptionType, String response, String url, Throwable cause) {
+        super(exceptionType, response, url, cause);
+    }
+
+    public TrailerAddictException(ApiExceptionType exceptionType, String response, int responseCode, String url, Throwable cause) {
+        super(exceptionType, response, responseCode, url, cause);
     }
 }
