@@ -37,6 +37,8 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -46,9 +48,9 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 import org.yamj.api.common.exception.ApiExceptionType;
-import org.yamj.api.common.http.CommonHttpClient;
-import org.yamj.api.common.http.DefaultPoolingHttpClient;
 import org.yamj.api.common.http.DigestedResponse;
+import org.yamj.api.common.http.DigestedResponseReader;
+import org.yamj.api.common.http.SimpleHttpClientBuilder;
 
 /**
  * Generic set of routines to process the DOM model data
@@ -60,8 +62,9 @@ public class DOMHelper {
 
     private static final Logger LOG = LoggerFactory.getLogger(DOMHelper.class);
     private static final String YES = "yes";
-    private static final String ENCODING = "UTF-8";
-    private static final CommonHttpClient HTTP_CLIENT = new DefaultPoolingHttpClient();
+    private static final CloseableHttpClient HTTP_CLIENT = new SimpleHttpClientBuilder().build();
+    private static final String DEFAULT_CHARSET = "UTF-8";
+    private static final Charset CHARSET = Charset.forName(DEFAULT_CHARSET);
     /*
      * Constants
      */
@@ -111,7 +114,9 @@ public class DOMHelper {
         Document doc = null;
 
         try {
-            DigestedResponse response = HTTP_CLIENT.requestContent(url, Charset.forName(ENCODING));
+            HttpGet httpGet = new HttpGet(url);
+            httpGet.addHeader("accept", "application/xml");
+            final DigestedResponse response = DigestedResponseReader.requestContent(HTTP_CLIENT, httpGet, CHARSET);
 
             if (response.getStatusCode() >= 500) {
                 throw new TrailerAddictException(ApiExceptionType.HTTP_503_ERROR, url);
@@ -119,7 +124,7 @@ public class DOMHelper {
                 throw new TrailerAddictException(ApiExceptionType.HTTP_404_ERROR, url);
             }
 
-            in = new ByteArrayInputStream(response.getContent().getBytes(ENCODING));
+            in = new ByteArrayInputStream(response.getContent().getBytes(DEFAULT_CHARSET));
 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
