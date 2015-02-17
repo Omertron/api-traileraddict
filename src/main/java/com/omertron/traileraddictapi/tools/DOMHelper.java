@@ -37,8 +37,8 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -62,7 +62,7 @@ public class DOMHelper {
 
     private static final Logger LOG = LoggerFactory.getLogger(DOMHelper.class);
     private static final String YES = "yes";
-    private static final CloseableHttpClient HTTP_CLIENT = new SimpleHttpClientBuilder().build();
+    private static final HttpClient HTTP_CLIENT = new SimpleHttpClientBuilder().build();
     private static final String DEFAULT_CHARSET = "UTF-8";
     private static final Charset CHARSET = Charset.forName(DEFAULT_CHARSET);
     /*
