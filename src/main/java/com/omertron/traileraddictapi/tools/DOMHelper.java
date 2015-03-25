@@ -43,7 +43,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
@@ -65,9 +64,7 @@ public class DOMHelper {
     private static final HttpClient HTTP_CLIENT = new SimpleHttpClientBuilder().build();
     private static final String DEFAULT_CHARSET = "UTF-8";
     private static final Charset CHARSET = Charset.forName(DEFAULT_CHARSET);
-    /*
-     * Constants
-     */
+    // Constants
     private static final String UNABLE_TO_PARSE = "Unable to parse TheTVDb response, please try again later.";
     private static final String ERROR_WRITING_DOC = "Error writing the document to {}";
 
@@ -94,7 +91,7 @@ public class DOMHelper {
             if (tagElement != null) {
                 NodeList tagNodeList = tagElement.getChildNodes();
                 if (tagNodeList != null && tagNodeList.getLength() > 0) {
-                    value = ((Node) tagNodeList.item(0)).getNodeValue();
+                    value = tagNodeList.item(0).getNodeValue();
                 }
             }
         }
@@ -133,11 +130,7 @@ public class DOMHelper {
             doc.getDocumentElement().normalize();
         } catch (UnsupportedEncodingException ex) {
             throw new TrailerAddictException(ApiExceptionType.INVALID_URL, "Unable to encode URL", url, ex);
-        } catch (ParserConfigurationException error) {
-            throw new TrailerAddictException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, error);
-        } catch (SAXException error) {
-            throw new TrailerAddictException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, error);
-        } catch (IOException error) {
+        } catch (ParserConfigurationException |     SAXException | IOException error) {
             throw new TrailerAddictException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, error);
         } finally {
             try {

@@ -44,7 +44,7 @@ public final class TrailerAddictParser {
 
     public static List<Trailer> getTrailers(URL url) {
         Document doc;
-        List<Trailer> trailers = new ArrayList<Trailer>();
+        List<Trailer> trailers = new ArrayList<>();
 
         try {
             LOG.trace("Attempting to get trailer XML from {}", url.toString());

@@ -42,7 +42,7 @@ public class Trailer implements Serializable {
     private String link = "";
     private String publishDate = "";
     private int trailerId = 0;
-    private Map<TrailerSize, String> embed = new EnumMap<TrailerSize, String>(TrailerSize.class);
+    private Map<TrailerSize, String> embed = new EnumMap<>(TrailerSize.class);
     /*
      * Properties for the detailed view from "simpleapi"
      */
@@ -50,9 +50,9 @@ public class Trailer implements Serializable {
     private String filmTitle = "";
     private String description = "";
     private String studio = "";
-    private List<String> directors = new ArrayList<String>();
-    private List<String> writers = new ArrayList<String>();
-    private List<String> cast = new ArrayList<String>();
+    private List<String> directors = new ArrayList<>();
+    private List<String> writers = new ArrayList<>();
+    private List<String> cast = new ArrayList<>();
     private String releaseDate = "";
 
     //<editor-fold defaultstate="collapsed" desc="Getter methods">
@@ -240,7 +240,7 @@ public class Trailer implements Serializable {
      * @return
      */
     public String getTrailerDownloadUrl() {
-        return (TRAILER_URL + trailerId);
+        return TRAILER_URL + trailerId;
     }
 
     /**
