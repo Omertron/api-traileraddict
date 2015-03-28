@@ -107,22 +107,24 @@ public class DOMHelper {
      * @throws TrailerAddictException
      */
     public static synchronized Document getEventDocFromUrl(String url) throws TrailerAddictException {
-        InputStream in = null;
         Document doc = null;
 
+        final DigestedResponse response;
         try {
             HttpGet httpGet = new HttpGet(url);
             httpGet.addHeader("accept", "application/xml");
-            final DigestedResponse response = DigestedResponseReader.requestContent(HTTP_CLIENT, httpGet, CHARSET);
+            response = DigestedResponseReader.requestContent(HTTP_CLIENT, httpGet, CHARSET);
 
             if (response.getStatusCode() >= 500) {
                 throw new TrailerAddictException(ApiExceptionType.HTTP_503_ERROR, url);
             } else if (response.getStatusCode() >= 300) {
                 throw new TrailerAddictException(ApiExceptionType.HTTP_404_ERROR, url);
             }
+        } catch (IOException ex) {
+            throw new TrailerAddictException(ApiExceptionType.CONNECTION_ERROR, "Unable to read URL", url, ex);
+        }
 
-            in = new ByteArrayInputStream(response.getContent().getBytes(DEFAULT_CHARSET));
-
+        try (InputStream in = new ByteArrayInputStream(response.getContent().getBytes(DEFAULT_CHARSET))) {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
 
@@ -130,17 +132,8 @@ public class DOMHelper {
             doc.getDocumentElement().normalize();
         } catch (UnsupportedEncodingException ex) {
             throw new TrailerAddictException(ApiExceptionType.INVALID_URL, "Unable to encode URL", url, ex);
-        } catch (ParserConfigurationException |     SAXException | IOException error) {
+        } catch (ParserConfigurationException | SAXException | IOException error) {
             throw new TrailerAddictException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, error);
-        } finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-            } catch (IOException ex) {
-                // Input Stream was already closed or null
-                LOG.trace("Stream already closed for getEventDocFromUrl", ex);
-            }
         }
 
         return doc;
