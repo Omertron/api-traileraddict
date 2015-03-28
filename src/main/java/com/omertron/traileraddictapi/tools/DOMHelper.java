@@ -100,15 +100,13 @@ public class DOMHelper {
     }
 
     /**
-     * Get a DOM document from the supplied URL
+     * Get the response from the URL
      *
      * @param url
      * @return
      * @throws TrailerAddictException
      */
-    public static synchronized Document getEventDocFromUrl(String url) throws TrailerAddictException {
-        Document doc = null;
-
+    private static DigestedResponse getResponse(String url) throws TrailerAddictException {
         final DigestedResponse response;
         try {
             HttpGet httpGet = new HttpGet(url);
@@ -123,20 +121,31 @@ public class DOMHelper {
         } catch (IOException ex) {
             throw new TrailerAddictException(ApiExceptionType.CONNECTION_ERROR, "Unable to read URL", url, ex);
         }
+        return response;
+    }
+
+    /**
+     * Get a DOM document from the supplied URL
+     *
+     * @param url
+     * @return
+     * @throws TrailerAddictException
+     */
+    public static synchronized Document getEventDocFromUrl(String url) throws TrailerAddictException {
+        final DigestedResponse response = getResponse(url);
 
         try (InputStream in = new ByteArrayInputStream(response.getContent().getBytes(DEFAULT_CHARSET))) {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
 
-            doc = db.parse(in);
+            Document doc = db.parse(in);
             doc.getDocumentElement().normalize();
+            return doc;
         } catch (UnsupportedEncodingException ex) {
             throw new TrailerAddictException(ApiExceptionType.INVALID_URL, "Unable to encode URL", url, ex);
         } catch (ParserConfigurationException | SAXException | IOException error) {
             throw new TrailerAddictException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, error);
         }
-
-        return doc;
     }
 
     /**
