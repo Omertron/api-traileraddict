@@ -6,9 +6,9 @@ Author: Stuart Boston (Omertron AT Gmail DOT com)
 API for the Trailer Addict website
 http://www.traileraddict.com/trailerapi
 
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=Omertron&url=https://github.com/Omertron/api-traileraddict&title=TrailerAddict API&language=&tags=github&category=software)
+Originally written for use by YetAnotherMovieJukebox ([YAMJv2](https://github.com/YAMJ/yamj-v2) & [YAMJv3](https://github.com/YAMJ/yamj-v3)), but anyone can feel free to use it for other projects as well.
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Omertron/api-traileraddict/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Build Status](http://jenkins.omertron.com/job/API-TrailerAddict/badge/icon)](http://jenkins.omertron.com/job/API-TrailerAddict)
 
 ***
 Usage
