@@ -23,17 +23,14 @@ import com.omertron.traileraddictapi.model.Trailer;
 import com.omertron.traileraddictapi.model.TrailerSize;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test class for Trailer Addict API
@@ -43,20 +40,22 @@ import org.slf4j.LoggerFactory;
 public class TrailerAddictApiTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(TrailerAddictApiTest.class);
-    private static final List<String> FILM_IDS = new ArrayList<String>();
-    private static final List<String> IMDB_IDS = new ArrayList<String>();
-    private static final List<String> ACTOR_IDS = new ArrayList<String>();
-    private static final List<String> FEATURED_IDS = new ArrayList<String>();
+    private static final List<String> FILM_IDS = new ArrayList<>();
+    private static final List<String> IMDB_IDS = new ArrayList<>();
+    private static final List<String> ACTOR_IDS = new ArrayList<>();
+    private static final List<String> FEATURED_IDS = new ArrayList<>();
     private static final int NUMBER_OF_TRAILERS = 4;
     private static final int REQUIRED_WIDTH = 720;
     private static final String TEST_WIDTH_COMPARE = "width=\"" + REQUIRED_WIDTH + "\"";
-
-    public TrailerAddictApiTest() {
-    }
+    private static final String TRAILERS_EMPTY = "List of trailers is empty for ";
+    private static final String TRAILERS_NULL = "List of trailers is null for ";
+    private static final String INCORRECT_NUMBER = "Incorrect number of trailers for ";
+    private static final String INCORRECT_WIDTH = "Incorrect width found in results for ";
+    private static final String NO_CUSTOM_TRAILER_SIZE = "No custom trailer size found for ";
 
     @BeforeClass
     public static void setUpClass() {
-        TestLogger.Configure();
+        TestLogger.configure();
 
         // Add the film IDs
         FILM_IDS.add("the-hobbit");
@@ -70,18 +69,6 @@ public class TrailerAddictApiTest {
         FEATURED_IDS.add("no");
     }
 
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of getFilm method, of class TrailerAddictApi.
      *
@@ -93,9 +80,9 @@ public class TrailerAddictApiTest {
 
         for (String id : FILM_IDS) {
             List<Trailer> trailers = TrailerAddictApi.getFilm(id, NUMBER_OF_TRAILERS);
-            assertNotNull("List of trailers is null for " + id, trailers);
-            assertFalse("List of trailers is empty for " + id, trailers.isEmpty());
-            assertTrue("Incorrect number of trailers for " + id, trailers.size() == NUMBER_OF_TRAILERS);
+            assertNotNull(TRAILERS_NULL + id, trailers);
+            assertFalse(TRAILERS_EMPTY + id, trailers.isEmpty());
+            assertTrue(INCORRECT_NUMBER + id, trailers.size() == NUMBER_OF_TRAILERS);
         }
     }
 
@@ -110,12 +97,12 @@ public class TrailerAddictApiTest {
 
         String id = FILM_IDS.get(0);
         List<Trailer> trailers = TrailerAddictApi.getFilm(id, NUMBER_OF_TRAILERS, REQUIRED_WIDTH);
-        assertNotNull("List of trailers is null for " + id, trailers);
-        assertFalse("List of trailers is empty for " + id, trailers.isEmpty());
+        assertNotNull(TRAILERS_NULL + id, trailers);
+        assertFalse(TRAILERS_EMPTY + id, trailers.isEmpty());
         Trailer t = trailers.get(0);
         String embed = t.getEmbed(TrailerSize.CUSTOM);
-        assertNotNull("No custom trailer size found for " + id, embed);
-        assertTrue("Incorrect width found in results for " + id, embed.contains(TEST_WIDTH_COMPARE));
+        assertNotNull(NO_CUSTOM_TRAILER_SIZE + id, embed);
+        assertTrue(INCORRECT_WIDTH + id, embed.contains(TEST_WIDTH_COMPARE));
     }
 
     /**
@@ -130,9 +117,9 @@ public class TrailerAddictApiTest {
         for (String id : ACTOR_IDS) {
             LOG.debug("Actor: {}", id);
             List<Trailer> trailers = TrailerAddictApi.getActor(id, NUMBER_OF_TRAILERS);
-            assertNotNull("List of trailers is null for " + id, trailers);
-            assertFalse("List of trailers is empty for " + id, trailers.isEmpty());
-            assertTrue("Incorrect number of trailers for " + id, trailers.size() == NUMBER_OF_TRAILERS);
+            assertNotNull(TRAILERS_NULL + id, trailers);
+            assertFalse(TRAILERS_EMPTY + id, trailers.isEmpty());
+            assertTrue(INCORRECT_NUMBER + id, trailers.size() == NUMBER_OF_TRAILERS);
         }
     }
 
@@ -147,12 +134,12 @@ public class TrailerAddictApiTest {
 
         String id = ACTOR_IDS.get(0);
         List<Trailer> trailers = TrailerAddictApi.getActor(id, NUMBER_OF_TRAILERS, REQUIRED_WIDTH);
-        assertNotNull("List of trailers is null for " + id, trailers);
-        assertFalse("List of trailers is empty for " + id, trailers.isEmpty());
+        assertNotNull(TRAILERS_NULL + id, trailers);
+        assertFalse(TRAILERS_EMPTY + id, trailers.isEmpty());
         Trailer t = trailers.get(0);
         String embed = t.getEmbed(TrailerSize.CUSTOM);
-        assertNotNull("No custom trailer size found for " + id, embed);
-        assertTrue("Incorrect width found in results for " + id, embed.contains(TEST_WIDTH_COMPARE));
+        assertNotNull(NO_CUSTOM_TRAILER_SIZE + id, embed);
+        assertTrue(INCORRECT_WIDTH + id, embed.contains(TEST_WIDTH_COMPARE));
     }
 
     /**
@@ -166,9 +153,9 @@ public class TrailerAddictApiTest {
 
         for (String id : IMDB_IDS) {
             List<Trailer> trailers = TrailerAddictApi.getFilmImdb(id, NUMBER_OF_TRAILERS);
-            assertNotNull("List of trailers is null for " + id, trailers);
-            assertFalse("List of trailers is empty for " + id, trailers.isEmpty());
-            assertTrue("Incorrect number of trailers for " + id, trailers.size() == NUMBER_OF_TRAILERS);
+            assertNotNull(TRAILERS_NULL + id, trailers);
+            assertFalse(TRAILERS_EMPTY + id, trailers.isEmpty());
+            assertTrue(INCORRECT_NUMBER + id, trailers.size() == NUMBER_OF_TRAILERS);
         }
     }
 
@@ -183,12 +170,12 @@ public class TrailerAddictApiTest {
 
         String id = IMDB_IDS.get(0);
         List<Trailer> trailers = TrailerAddictApi.getFilmImdb(id, NUMBER_OF_TRAILERS, REQUIRED_WIDTH);
-        assertNotNull("List of trailers is null for " + id, trailers);
-        assertFalse("List of trailers is empty for " + id, trailers.isEmpty());
+        assertNotNull(TRAILERS_NULL + id, trailers);
+        assertFalse(TRAILERS_EMPTY + id, trailers.isEmpty());
         Trailer t = trailers.get(0);
         String embed = t.getEmbed(TrailerSize.CUSTOM);
-        assertNotNull("No custom trailer size found for " + id, embed);
-        assertTrue("Incorrect width found in results for " + id, embed.contains(TEST_WIDTH_COMPARE));
+        assertNotNull(NO_CUSTOM_TRAILER_SIZE + id, embed);
+        assertTrue(INCORRECT_WIDTH + id, embed.contains(TEST_WIDTH_COMPARE));
     }
 
     /**
@@ -202,9 +189,9 @@ public class TrailerAddictApiTest {
 
         for (String id : FEATURED_IDS) {
             List<Trailer> trailers = TrailerAddictApi.getFeatured(id, NUMBER_OF_TRAILERS);
-            assertNotNull("List of trailers is null for " + id, trailers);
-            assertFalse("List of trailers is empty for " + id, trailers.isEmpty());
-            assertTrue("Incorrect number of trailers for " + id, trailers.size() == NUMBER_OF_TRAILERS);
+            assertNotNull(TRAILERS_NULL + id, trailers);
+            assertFalse(TRAILERS_EMPTY + id, trailers.isEmpty());
+            assertTrue(INCORRECT_NUMBER + id, trailers.size() == NUMBER_OF_TRAILERS);
         }
     }
 
@@ -219,12 +206,12 @@ public class TrailerAddictApiTest {
 
         for (String id : FEATURED_IDS) {
             List<Trailer> trailers = TrailerAddictApi.getFeatured(id, NUMBER_OF_TRAILERS, REQUIRED_WIDTH);
-            assertNotNull("List of trailers is null for " + id, trailers);
-            assertFalse("List of trailers is empty for " + id, trailers.isEmpty());
+            assertNotNull(TRAILERS_NULL + id, trailers);
+            assertFalse(TRAILERS_EMPTY + id, trailers.isEmpty());
             Trailer t = trailers.get(0);
             String embed = t.getEmbed(TrailerSize.CUSTOM);
-            assertNotNull("No custom trailer size found for " + id, embed);
-            assertTrue("Incorrect width found in results for " + id, embed.contains(TEST_WIDTH_COMPARE));
+            assertNotNull(NO_CUSTOM_TRAILER_SIZE + id, embed);
+            assertTrue(INCORRECT_WIDTH + id, embed.contains(TEST_WIDTH_COMPARE));
         }
     }
 
@@ -234,7 +221,7 @@ public class TrailerAddictApiTest {
      * @throws com.omertron.traileraddictapi.TrailerAddictException
      */
     @Ignore("Tested elsewhere")
-    public void testGetSimpleApi_String() throws TrailerAddictException {
+    public void testGetSimpleApiString() throws TrailerAddictException {
     }
 
     /**
@@ -243,13 +230,13 @@ public class TrailerAddictApiTest {
      * @throws com.omertron.traileraddictapi.TrailerAddictException
      */
     @Test
-    public void testGetSimpleApi_Trailer() throws TrailerAddictException {
+    public void testGetSimpleApiTrailer() throws TrailerAddictException {
         LOG.info("getSimpleApi (via Trailer)");
 
         for (String id : FILM_IDS) {
             List<Trailer> trailers = TrailerAddictApi.getFilm(id, NUMBER_OF_TRAILERS);
-            assertNotNull("List of trailers is null for " + id, trailers);
-            assertFalse("List of trailers is empty for " + id, trailers.isEmpty());
+            assertNotNull(TRAILERS_NULL + id, trailers);
+            assertFalse(TRAILERS_EMPTY + id, trailers.isEmpty());
 
             // Just test the first trailer
             Trailer trailer = TrailerAddictApi.getSimpleApi(trailers.get(0));
